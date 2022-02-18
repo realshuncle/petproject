@@ -1,4 +1,12 @@
+@font-face {
+  font-family: 'Myfont';
+  src: url('./Montserrat-Medium.woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
 .hello {
   color: red;
+  font-family: 'Myfont';
   background: url('./icon.png');
 }
