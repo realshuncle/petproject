@@ -7,10 +7,8 @@ const pagesDir = path.resolve(__dirname, "src/pages");
 const pages = fs.readdirSync(pagesDir);
 
 let mode = "development";
-//let sm = "source-map";
 if (process.env.NODE_ENV === "production") {
   mode = "production";
-  //sm = "eval";
 }
 console.log(mode + " mode");
 
