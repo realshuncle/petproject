@@ -1,0 +1,50 @@
+{
+  "name": "petproject",
+  "version": "1.0.0",
+  "description": "It's my pet project",
+  "private": true,
+  "scripts": {
+    "start": "set NODE_ENV=development&&webpack serve --open",
+    "dev": "set NODE_ENV=development&&webpack",
+    "build": "set NODE_ENV=production&&webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realshuncle/petproject.git"
+  },
+  "author": "vehcamut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/realshuncle/petproject/issues"
+  },
+  "homepage": "https://github.com/realshuncle/petproject#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "bemdecl-to-fs-loader": "^0.0.4",
+    "bemjson-to-decl": "^1.0.3",
+    "css-loader": "^6.6.0",
+    "csv-loader": "^3.0.3",
+    "fs": "^0.0.1-security",
+    "html-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "html2bemdecl-loader": "^1.0.5",
+    "html2bemjson": "^1.10.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "postcss": "^8.4.6",
+    "postcss-loader": "^6.2.1",
+    "postcss-preset-env": "^7.4.1",
+    "pug": "^3.0.2",
+    "pug-html-loader": "^1.1.5",
+    "pug-loader": "^2.4.0",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.49.8",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.69.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "xml-loader": "^1.2.1"
+  }
+}
