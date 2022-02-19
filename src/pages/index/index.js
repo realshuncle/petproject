@@ -1,2 +1,2 @@
 //require('./index.html');
-alert("lololo");
+//alert("lololo");
