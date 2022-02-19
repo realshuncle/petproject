@@ -1,6 +1,8 @@
+@import '../../theme/colors.scss';
+
 .test {
-  color: red;
+  color: $text_color50;
   font-family: 'Montserrat';
-  font-weight: 100;
-  font-style: italic;
+  font-weight: 900;
+  font-style: normal;
 }

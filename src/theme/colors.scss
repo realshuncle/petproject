@@ -1,0 +1,8 @@
+$text_color: rgba(31, 32, 65, 1);
+$text_color75: transparentize($text_color, 0.25);
+$text_color50: transparentize($text_color, 0.5);
+$text_color25: transparentize($text_color, 0.75);
+$text_color05: transparentize($text_color, 0.95);
+
+$primary_color: #BC9CFF;
+$secondary_color: #6FCF97;
