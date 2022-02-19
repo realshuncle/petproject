@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import printMe from './print';
+import printMe from './src/print';
 
 import "./style.css";
 

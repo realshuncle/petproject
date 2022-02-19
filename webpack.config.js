@@ -7,15 +7,17 @@ const pagesDir = path.resolve(__dirname, "src/pages");
 const pages = fs.readdirSync(pagesDir);
 
 let mode = "development";
+//let sm = "source-map";
 if (process.env.NODE_ENV === "production") {
   mode = "production";
+  //sm = "eval";
 }
 console.log(mode + " mode");
 
 module.exports = {
   mode: mode,
   entry: "./src/entry.js",
-  devtool: "source-map",
+  //devtool: "source-map",
   output: {
     filename: "[name].[contenthash].js",
     assetModuleFilename: "assets/[hash][ext][query]",
@@ -64,7 +66,26 @@ module.exports = {
     rules: [
       {
         test: /\.html$/i,
-        loader: "html-loader",
+        //use: 
+        //use: ["html-loader", "my-loader",],
+        use: [
+          {
+            loader: "html-loader",
+          }
+          /*{
+            // Передаем результат в bemdecl-to-fs-loader
+            loader: 'bemdecl-to-fs-loader',
+            // Указываем уровни переопределения и расширения технологий
+            options: { levels: ['pages'], extensions: ['css', 'js'] }
+          },
+          {
+            loader: 'html2bemdecl-loader',
+            // Указываем уровни переопределения и расширения технологий
+          },
+          //"html-loader",
+          "my-loader",*/
+        ]
+        //loader: "html-loader",
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -88,6 +109,7 @@ module.exports = {
           },
           "resolve-url-loader",
           "sass-loader",
+          //"my-loader",
         ],
       },
       {
@@ -108,12 +130,51 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: "pug-loader",
+        //loader: "pug-loader",
+        use: [
+          
+          {
+            loader: "pug-loader",
+            options: {
+              pretty: true,
+              root: path.resolve(__dirname, "src"), // Можно прописывать абсолютные пути внутри pug относительно указанного пути.
+            },
+          },
+          /*{
+            loader: "html-loader",
+          },
+          {
+            loader: "pug-html-loader",
+            options: {
+              "pretty":true
+            }
+          }*/
+        ]
+        /*use:[
+          {
+              // Передаем результат в bemdecl-to-fs-loader
+              loader: 'bemdecl-to-fs-loader',
+              // Указываем уровни переопределения и расширения технологий
+              options: { levels: ['pages'], extensions: ['css', 'js'] }
+          },
+          {
+            loader: 'html2bemdecl-loader',
+            // Указываем уровни переопределения и расширения технологий
+          },
+          {
+            loader: "pug-loader",
+            options: {
+              pretty: true,
+              root: path.resolve(__dirname, "src"), // Можно прописывать абсолютные пути внутри pug относительно указанного пути.
+            },
+          },
+          "my-loader"
+        ],
         exclude: /(node_modules|bower_components)/,
-        options: {
+        /*options: {
           pretty: true,
           root: path.resolve(__dirname, "src"), // Можно прописывать абсолютные пути внутри pug относительно указанного пути.
-        },
+        },*/
       },
       {
         test: /\.m?js$/,
@@ -127,4 +188,13 @@ module.exports = {
       },
     ],
   },
+  //resolveLoader: {
+    //alias: {
+      //'my-loader': path.resolve(__dirname, 'src/my-loader.js'),
+      //'html-to-bem-loader': path.resolve(__dirname, 'src/html-to-bem-loader.js'),
+    //},
+  //},
 };
+if (mode === "development") {
+  module.exports.devtool = "source-map";
+}
