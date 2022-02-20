@@ -1,0 +1,53 @@
+@import '../../theme/colors.scss';
+
+.form {
+  color: $text_color75;
+  &__text-field {
+    //color: $text_color75;
+    /*border: 1px solid $text_color25;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: $text_color75;
+    //padding: 12px 15px;
+    //margin-top: 5px;
+
+    &:focus, &:hover{
+      border-color: $text_color50;
+      //color: $text_color75;
+    }*/
+    &::placeholder {
+      color: $text_color25; 
+    }
+  }
+  &__dropdown {
+    &::after {
+
+    }
+    background-image: url(./img/expand_more_50.svg);
+    background-repeat: no-repeat;
+    background-position: top 17px right 15px;
+    &:focus{
+      //border-color: $color-ds50;
+      //color: $color-ds75;
+      background-image: url(./img/expand_more_75.svg);
+      //background-opacity: 0.2;
+    }
+  }
+  &__dropdown-menu {
+
+  }
+  &__dropdown-menu-el {
+    display: flex;
+    verticle-align:
+  }
+  &__dropdown-menu-button {
+    background-color: transparent;
+    border: 1px solid $text_color50;
+    //border-radius: 200px;
+    color: $text_color50;
+    height: 30px;
+    width: 30px;
+    border-radius: 22px;
+
+  }
+}

@@ -1,0 +1,18 @@
+mixin text-field([label, name, placeholder, mod = []])
+  label.form__label
+    h3 #{label}
+    input(type="text", name=name, placeholder=placeholder, class="form__text-field" class = mod)
+
+mixin dropdown([label, name, placeholder, mod = []])
+  label.form__label
+    h3 #{label}  
+    input(type="text", name=name, placeholder=placeholder, class="form__dropdown" class = mod, readonly)
+
+mixin dropdown-menu([labels = [], bt1_name = "", bt2_name = ""])
+  div.form__dropdown-menu
+  each label in labels
+    div.form__dropdown-menu-el
+      h3 label
+      button(type="button" class="form__dropdown-menu-button") -
+      h3 2
+      button(type="button" class="form__dropdown-menu-button") +

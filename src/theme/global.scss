@@ -23,8 +23,30 @@ h2 {
 }
 
 h3 {
+  margin-bottom: 5px;
+
   font-size: 12px;
   font-weight: bold;
   color: $text_color;
   text-transform: uppercase;
+}
+
+input {
+  width: 320px;
+  height: 44px;
+  padding-left: 15px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+
+  border: 1px solid $text_color25;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: $text_color75;
+  //padding: 12px 15px;
+  //margin-top: 5px;
+
+  &:focus, &:hover{
+    border-color: $text_color50;
+    //color: $text_color75;
+  }
 }

@@ -1,3 +1,5 @@
+include ../../components/form/form.pug
+
 doctype html
 html(lang="en")
   head
@@ -10,3 +12,7 @@ html(lang="en")
     h2 h2 title
     h3 Label title
     p Test my color text
+    form.form
+      +text-field(['Text-field', 'some-text', 'placeholder', ['1', '2']])
+      +dropdown(['Text-field', 'some-text', 'placeholder', ['1', '2']])
+      +dropdown-menu([['Спальни', 'Кровати', 'Ванные комнаты']])
