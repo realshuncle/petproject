@@ -10,9 +10,15 @@ mixin dropdown([label, name, placeholder, mod = []])
 
 mixin dropdown-menu([labels = [], bt1_name = "", bt2_name = ""])
   div.form__dropdown-menu
-  each label in labels
-    div.form__dropdown-menu-el
-      h3 #{label}
-      button(type="button" class="form__dropdown-menu-button") -
-      h3 2
-      button(type="button" class="form__dropdown-menu-button") +
+    each label in labels
+      div.form__dropdown-menu-el
+        p #{label}
+        div.form__dropdown-menu-counter
+          button(type="button" class="form__dropdown-menu-button form__dropdown-menu-button_disabled" disabled="true") -
+          p 0
+          button(type="button" class="form__dropdown-menu-button") +
+
+mixin dropdown-with-menu(dropdown_set = [], menu_set = [])
+  div.form__dropdown-with-menu
+    +dropdown(dropdown_set)
+    +dropdown-menu(menu_set)

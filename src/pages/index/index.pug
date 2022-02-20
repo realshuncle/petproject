@@ -14,5 +14,7 @@ html(lang="en")
     p Test my color text
     form.form
       +text-field(['Text-field', 'some-text', 'placeholder', ['1', '2']])
-      +dropdown(['Text-field', 'some-text', 'placeholder', ['1', '2']])
-      +dropdown-menu([['Спальни', 'Кровати', 'Ванные комнаты']])
+      +dropdown-with-menu(['Text-field', 'some-text', 'placeholder', ['1', '2']], [['Спальни', 'Кровати', 'Ванные комнаты']])
+      ///+dropdown(['Text-field', 'some-text', 'placeholder', ['1', '2']])
+      //+dropdown-menu([['Спальни', 'Кровати', 'Ванные комнаты']])
+    p New text
