@@ -12,7 +12,7 @@ mixin dropdown-menu([labels = [], bt1_name = "", bt2_name = ""])
   div.form__dropdown-menu
   each label in labels
     div.form__dropdown-menu-el
-      h3 label
+      h3 #{label}
       button(type="button" class="form__dropdown-menu-button") -
       h3 2
       button(type="button" class="form__dropdown-menu-button") +
