@@ -1,0 +1,213 @@
+/**
+ * @package PickMeUp
+ * @author  Nazar Mokrynskyi <nazar@mokrynskyi.com>
+ * @license 0BSD
+ */
+@import '../../theme/colors.scss';
+
+$border-radius                    : .4em !default;
+$background                       : white;//#000 !default;
+$color                            : $text_color;//#eee !default;
+$background-hover                 : transparent !default;
+$color-hover                      : #88c5eb !default;
+$nav-color                        : $color !default;
+$nav-color-hover                  : $color-hover !default;
+$not-in-month                     : $text_color25;//#666 !default;
+$not-in-month-hover               : #999 !default;
+$disabled                         : #333 !default;
+$selected                         : $text_color;//$color !default;
+$selected-background              : $primary_color;//#136a9f !default;
+$not-in-month-selected-background : #17384d !default;
+$day-of-week                      : $not-in-month-hover !default;
+$today-background                 : $secondary_color;//$not-in-month-selected-background !default;
+$today-color                      : white; //$color-hover !default;
+
+
+
+.pickmeup {
+	background      : $background;
+	border-radius   : $border-radius;
+	-moz-box-sizing : content-box;
+	box-sizing      : content-box;
+	display         : inline-block;
+	position        : absolute;
+	touch-action    : manipulation;
+	border					: 1px solid $text_color25;
+	width						: 320px;
+	* {
+		-moz-box-sizing : border-box;
+		box-sizing      : border-box;
+	}
+
+	&.pmu-flat {
+		position : relative;
+	}
+
+	&.pmu-hidden {
+		display : none;
+	}
+
+	.pmu-instance {
+		display    : inline-block;
+		height     : 13.8em;
+		padding    : .5em;
+		text-align : center;
+		//width      : 15em;
+
+		.pmu-button {
+			margin: auto auto;
+			//width: 40px;
+			//height: 40px;
+			color           : $color;
+			cursor          : pointer;
+			outline         : none;
+			text-decoration : none;
+			
+			//display: flex;
+  		//align-items: center;
+			//justify-content: center;
+			
+		}
+
+		.pmu-today {
+			border-radius: 22px;
+			background : $today-background;
+			color      : $today-color;
+		}
+
+		.pmu-button:hover {
+			background : $background-hover;
+			color      : $color-hover;
+		}
+
+		.pmu-not-in-month {
+			color : $not-in-month;
+		}
+
+		.pmu-disabled,
+		.pmu-disabled:hover {
+			color  : $disabled;
+			cursor : default;
+		}
+
+		.pmu-selected {
+			background: linear-gradient(180deg, transparentize(#BC9CFF, 0.75) 0%, transparentize(#8BA4F9, 0.75) 100%);
+			//opacity: 0.25;
+			//background : $selected-background;
+			color      : $selected;
+		}
+
+		.pmu-not-in-month.pmu-selected {
+			background : $not-in-month-selected-background;
+		}
+
+		nav {
+			color       : $nav-color;
+			display     : -ms-flexbox;
+			display     : -webkit-flex;
+			display     : flex;
+			line-height : 2em;
+
+			*:first-child :hover {
+				color : $nav-color-hover;
+			}
+
+			.pmu-prev,
+			.pmu-next {
+				background-color: red;
+				display : none;
+				height  : 2em;
+				width   : 1em;
+			}
+			.pmu-month {
+				width : 14em;
+			}
+		}
+
+		.pmu-years,
+		.pmu-months {
+			color					: $text_color;
+			* {
+				display     : inline-block;
+				line-height : 3.6em;
+				width       : 3.5em;
+			}
+		}
+
+		.pmu-day-of-week {
+			color  : $day-of-week;
+			cursor : default;
+		}
+
+		.pmu-day-of-week,
+		.pmu-days {
+			//display: flex;
+			//flex-direction: column;
+  		//flex-wrap: wrap;
+
+
+			* {
+				
+				//vertical-align: middle;
+				display     : inline-block;
+				line-height : 2.8em;//1.5em;
+				width       : 2.8em;//2em;
+				position: relative;
+			}
+			.pmu-begin {
+				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				border-radius: 22px;
+				display: block;
+				position: absolute;
+				content: "";
+				width: 100%;
+				top: 0;
+				height: 100%;
+				color: white;
+			}
+			.pmu-selected_begin {
+				//color: white;
+				//background-color: red;
+				border-radius: 22px 0 0 22px;
+			}
+			.pmu-selected_end {
+				//color: white;
+				//background-color: red;
+				border-radius: 0 22px 22px 0;
+			}
+			.pmu-selected_none {
+				//background-color: red;
+				border-radius: 22px;
+			}
+		}
+
+		.pmu-day-of-week * {
+			line-height : 1.8em;
+		}
+	}
+
+	.pmu-instance:first-child .pmu-prev,
+	.pmu-instance:last-child .pmu-next {
+		display : block;
+		
+	}
+
+	.pmu-instance:first-child,
+	.pmu-instance:last-child {
+		.pmu-month {
+			width : 13em;
+			
+		}
+	}
+
+	.pmu-instance:first-child:last-child .pmu-month {
+		width : 12em;
+	}
+
+	&:not(.pmu-view-days) .pmu-days,
+	&:not(.pmu-view-days) .pmu-day-of-week,
+	&:not(.pmu-view-months) .pmu-months,
+	&:not(.pmu-view-years) .pmu-years {
+		display : none;
+	}
+}
