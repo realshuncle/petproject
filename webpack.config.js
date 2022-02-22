@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack')
 
 const pagesDir = path.resolve(__dirname, "src/pages");
 const pages = fs.readdirSync(pagesDir);
@@ -61,6 +62,11 @@ module.exports = {
         
       // /каталог со страницами/имя дирректории/имя диррекктории.pug
     ),
+    new webpack.ProvidePlugin({
+      $: 'jquerry',
+      jQuerry: 'jquerry',
+      //'window.jQuerry': 'jquerry',
+    })
     /*new HtmlWebpackPlugin({
       template: "./src/index.pug",
     }),*/
