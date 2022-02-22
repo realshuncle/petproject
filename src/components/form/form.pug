@@ -22,3 +22,15 @@ mixin dropdown-with-menu(dropdown_set = [], menu_set = [])
   div.form__dropdown-with-menu
     +dropdown(dropdown_set)
     +dropdown-menu(menu_set)
+
+mixin input-date([label, name, placeholder='ДД.ММ.ГГГГ', mod = []])
+  //mod += ["from__date-masked"]
+  //mod = mod.push("from__date-masked")
+  label.form__label
+    h3 #{label}
+    input(type="text", name=name, placeholder=placeholder, class="form__date-masked" class = mod)
+
+mixin date-dropdown([label1, label2, mod=[]])
+  div.form__date-dropdown-glow
+    input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date-dropdown form__dropdown_date-dropdown_begin" class = mod, readonly)
+    input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date-dropdown form__dropdown_date-dropdown_end" class = mod, readonly)
