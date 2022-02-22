@@ -20,6 +20,11 @@
     }
   }
   &__dropdown {
+    &_date-dropdown {
+      width: 150px;
+    }
+    
+    cursor: pointer;
     &::after {
 
     }
@@ -34,6 +39,7 @@
     }
   }
   &__dropdown-menu {
+    
     display: none;
     flex-direction: column;
     box-sizing: border-box;
@@ -50,6 +56,14 @@
     border: 1px solid $text_color25;
     border-radius: 4px;
 
+  }
+  &__date-dropdown-glow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    width: 320px;
   }
   &__dropdown-menu-el {
     display: flex;
