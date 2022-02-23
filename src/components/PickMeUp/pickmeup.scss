@@ -5,7 +5,7 @@
  */
 @import '../../theme/colors.scss';
 
-$border-radius                    : .4em !default;
+$border-radius                    : 4px;//.4em !default;
 $border-radius_day								: 2em;//22px;
 $background                       : white;//#000 !default;
 $color                            : $text_color50;//#eee !default;
@@ -25,26 +25,21 @@ $day-of-week                      : $primary_color;//$not-in-month-hover !defaul
 $today-background                 : linear-gradient(180deg, $secondary_color 0%, $secondary_color_2 100%);//$secondary_color;//$not-in-month-selected-background !default;
 $today-color                      : white; //$color-hover !default;
 
-
-
 .pickmeup {
 	background      : $background;
 	border-radius   : $border-radius;
 	-moz-box-sizing : content-box;
 	box-sizing      : content-box;
 	display         : inline-block;
-	position        : absolute;
+	position        : relative;//absolute;
 	touch-action    : manipulation;
-	border					: 1px solid $text_color25;
-	width						: 320px;
-	height					: 369px;
+	//border					: 1px solid $text_color25;
+	width						: 318px;
+	height					: 359px;
 	padding-top			: 0.95em;
+	z-index: 1;
 	//font-weight: bold;
-	.pmu-buttons-bar {
-		position: relative;
-		display: inline-block;
-		width: 0px;
-	}
+	
 	* {
 		-moz-box-sizing : border-box;
 		box-sizing      : border-box;

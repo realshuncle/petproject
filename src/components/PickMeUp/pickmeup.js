@@ -1033,8 +1033,8 @@
 					left += 'px';
 					top += 'px';
 				}
-				root_element.style.left = left;
-				root_element.style.top  = top;
+				//root_element.style.left = left;
+				//root_element.style.top  = top;
 				setTimeout(function () {
 					dom_on(target, document.documentElement, 'click', options.bound.hide);
 					dom_on(target, window, 'resize', options.bound.forced_show);
@@ -1048,18 +1048,28 @@
 	 * @param {Event}   event
 	 */
 	function hide (target, event) {
-		var root_element = target.__pickmeup.element,
-			options      = target.__pickmeup.options;
+		var root_element = target.querySelector(".pmu-div"),//.__pickmeup.element,
+			options      = target.__pickmeup.options;//target.__pickmeup.options;
+			//console.log(root_element);
+			//console.log(event.target.classList);
+			//console.log(!undefined);
 		//noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures
 		if (
 			!event || !event.target ||										//Called directly
+			event.target.classList.contains('prim') ||
 			(
 				event.target !== target &&									//Clicked not on element itself
 				!(root_element.compareDocumentPosition(event.target) & 16)	//And not on its children
 			)
 		) {
 			if (dom_dispatch_event(target, 'hide')) {
-				dom_add_class(root_element, 'pmu-hidden');
+				//console.log('INIF');
+				//dom_add_class(root_element, 'pmu-hidden');
+				//dom_off(target, document.documentElement, 'click', options.bound.hide);
+				//dom_off(target, window, 'resize', options.bound.forced_show);
+
+				dom_add_class(target.__pickmeup.element, 'pmu-hidden');
+				//console.log(target.__pickmeup.element);
 				dom_off(target, document.documentElement, 'click', options.bound.hide);
 				dom_off(target, window, 'resize', options.bound.forced_show);
 				options.lastSel = false;

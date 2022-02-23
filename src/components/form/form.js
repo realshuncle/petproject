@@ -371,47 +371,138 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     locale : 'ru',
     format	: 'd.m.Y',
     mode : 'range',
+    prev : '',
+    next : '',
+    //positions : 'top',
+    
     //flat : true,
   });
-  //console.log(dateDropdown);
+  /*let temp = document.querySelector(".pickmeup");
+  console.log(temp, e);
+  let y = document.createElement("div");
+  y.classList.add("pmu-buttons-bar");
+  y.textContent = "sdfdsfdsfdssssssssssssssss";
+  y.appendChild(temp);
+  document.body.appendChild(y);*/
+  //console.log(x);
+//console.log(dateDropdown);
   //x.
   dropdowns[0].addEventListener('click', function() {
-    //if (x.hide)
     x.show();
   });
   dropdowns[1].addEventListener('click', function() {
-    //if (x.hide)
     x.show();
   });
-  let datepicker_link = ['#check-in','#check-out'];
-  /*$('.datepicker').each(function() {
-    pickmeup(this, datepicker_options);
-  });*/
-  let datepicker_options = {};
-  //$('.datepicker').each(
-    //function() {
   dateDropdown.addEventListener('pickmeup-change', function (e) {
-    //alert("lol");
-    //let options = datepicker_options;
-    //console.log(options);
-      //if ('#' + $(this).attr('id') == datepicker_link[0]) {
-    //console.log(e.detail.formatted_date[0]);
     dropdowns[0].value = e.detail.formatted_date[0];
     dropdowns[1].value = e.detail.formatted_date[1];
-    /*let new_date = moment(e.detail.date).add(1, 'days').toDate();
-    if (pickmeup(datepicker_link[1]).get_date() <= e.detail.date) {
-      options.date = new_date;
-    }
-    options.min = new_date;
-    options.default_date = true;
+  })
+  
+  let pmu = document.querySelectorAll(".pickmeup");
+  //console.log(pmu[pmu.length - 1]);
+  /*for (let pmu of document.querySelectorAll(".pickmeup")) {
+  }*/
+  pmu = pmu[pmu.length - 1];
+  let y = document.createElement("div");
+  y.classList.add("pmu-div");
+  
 
-    pickmeup(datepicker_link[1]).destroy();
-    pickmeup(datepicker_link[1], options);*/
-  }
-    //}
-    )
+  let dv = document.createElement("div");
+  dv.classList.add("pmu-buttons-bar")
+
+  let btn = document.createElement("button");
+  btn.textContent = "очистить";
+  btn.setAttribute("type", "button");
+  btn.addEventListener("click", function() {
+    x.clear();
+    dropdowns[0].value = "";
+    dropdowns[1].value = "";
+    //alert('fd');
+  })
+ 
+  dv.appendChild(btn);
+
+  btn = document.createElement("button");
+  btn.textContent = "применить";
+  btn.setAttribute("type", "button");
+  btn.classList.add("prim");
+  /*btn.addEventListener("click", function() {
+    //x.hide();
+    //pmu.classList.add("pmu-hidden");
+    //alert('lol');
+    //dropdowns[0].value = "";
+    //dropdowns[1].value = "";
+    //alert('fd');
+  })*/
+ 
+  dv.appendChild(btn);
+
+  y.appendChild(pmu);
+  y.append(dv);
+  y.classList.add('pmu-div_hidden');
+  /*btn.setAttribute("type", "button");
+  btn.addEventListener("click", function() {
+    x.clear();
+    dropdowns[0].value = "";
+    dropdowns[1].value = "";
+    //alert('fd');
+  })*/
+  /*pmu.addEventListener("blur", function() {
+    alert(lol);
+  })
+  y.addEventListener("blur", function() {
+    alert("lol");
+  })*/
+
+  //y.textContent = "sdfdsfdsfdssssssssssssssss";
+  
+  //document.body.appendChild(y)
+  dateDropdown.appendChild(y);
+  dateDropdown.addEventListener('pickmeup-hide', function (e) {
+    y.classList.add('pmu-div_hidden');
+    //alert('lol');
+  })
+  dateDropdown.addEventListener('pickmeup-show', function (e) {
+    y.classList.remove('pmu-div_hidden');
+    //alert('lol');
+  })
+  //}
+  /*dateDropdown.addEventListener('pickmeup-init', function (e) {
+    alert('CREATE');
+  })*/
+  /*dateDropdown.addEventListener('pickmeup-fill', function (e) {
+    alert('lol');
+    let temp = document.querySelector(".pickmeup");
+    //let t1 = temp.querySelector(".pmu-buttons-bar");
+    //if (t1) temp.removeChild(t1);
+    console.log(temp, e);
+    let y = document.createElement("div");
+    y.classList.add("pmu-buttons-bar");
+    y.textContent = "sdfdsfdsfdssssssssssssssss";
+    y.appendChild(temp);
+    document.body.appendChild(y);
+    //temp.appendChild(y);
+  })*/
   //});
   //new AirDatepicker(btn, options);
   
 } 
+
+/*for (let pmu of document.querySelectorAll(".pickmeup")) {
+  let y = document.createElement("div");
+  y.classList.add("pmu-buttons-bar");
+  let btn = document.createElement("button");
+  
+  y.textContent = "sdfdsfdsfdssssssssssssssss";
+  y.appendChild(btn);
+  y.appendChild(pmu);
+  document.body.appendChild(y)
+}*/
+/*let temp = document.querySelector(".pickmeup");
+console.log(temp, e);
+let y = document.createElement("div");
+y.classList.add("pmu-buttons-bar");
+y.textContent = "sdfdsfdsfdssssssssssssssss";
+y.appendChild(temp);
+document.body.appendChild(y);*/
 
