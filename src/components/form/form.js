@@ -371,6 +371,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     locale : 'ru',
     format	: 'd.m.Y',
     mode : 'range',
+    //flat : true,
   });
   //console.log(dateDropdown);
   //x.

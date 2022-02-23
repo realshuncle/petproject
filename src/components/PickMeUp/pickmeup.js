@@ -486,11 +486,11 @@
 					//console.log(options.date[0]);
 					//console.log(options.date[1]);
 					//console.log(options.date[0], local_date);
-					console.log(day_element);
-					if (JSON.stringify(options.date[0]) == JSON.stringify(local_date))
+					//console.log(day_element);
+					/*if (JSON.stringify(options.date[0]) == JSON.stringify(local_date))
 						console.log(local_date);
 					if (JSON.stringify(options.date[1]) == JSON.stringify(local_date))
-						console.log(local_date);
+						console.log(local_date);*/
 					//console.log("");
 					//STOP
 					day_element.__pickmeup_year  = local_date.getFullYear();
@@ -523,12 +523,27 @@
 						dom_add_class(day_element, 'pmu-disabled');
 					} else if (from_user.selected || (!('selected' in from_user) && selected)) {
 						//console.log(day_element);
-					
 						dom_add_class(day_element, 'pmu-selected');
 					//	alert('LOL');
 					}
 					if (val === today) {
-						dom_add_class(day_element, 'pmu-today');
+						if (day_element.classList.contains('pmu-selected')) {
+							//console.log("TODAY");
+							temp = document.createElement('div');
+							temp.textContent = Number(local_date.getDate());
+							dom_add_class(temp, 'pmu-today_inrange');
+							/*if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
+								dom_add_class(day_element, 'pmu-selected_begin');
+							else
+								dom_add_class(day_element, 'pmu-selected_none');*/
+							//temp.appendChild(day_element);
+							day_element.appendChild(temp);
+							//dom_add_class(day_element, 'pmu-today');
+							}
+						else {
+							dom_add_class(day_element, 'pmu-today');
+						}
+						
 					}
 					if (from_user.class_name) {
 						from_user.class_name.split(' ').forEach(

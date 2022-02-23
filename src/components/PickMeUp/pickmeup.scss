@@ -17,9 +17,9 @@ $not-in-month-hover               : #999 !default;
 $disabled                         : #333 !default;
 $selected                         : $text_color;//$color !default;
 $selected-background              : $primary_color;//#136a9f !default;
-$not-in-month-selected-background : #17384d !default;
+$not-in-month-selected-background : linear-gradient(180deg, transparentize(#BC9CFF, 0.85) 0%, transparentize(#8BA4F9, 0.85) 100%);//#17384d !default;
 $day-of-week                      : $not-in-month-hover !default;
-$today-background                 : $secondary_color;//$not-in-month-selected-background !default;
+$today-background                 : linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);//$secondary_color;//$not-in-month-selected-background !default;
 $today-color                      : white; //$color-hover !default;
 
 
@@ -66,6 +66,13 @@ $today-color                      : white; //$color-hover !default;
 			//display: flex;
   		//align-items: center;
 			//justify-content: center;
+			/*&:hover {
+				border-radius: 1.7em;//22px;
+				background: red;//, linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				//background-color: red;
+				//background : $background-hover;
+				color      : white;
+			}*/
 			
 		}
 
@@ -75,10 +82,7 @@ $today-color                      : white; //$color-hover !default;
 			color      : $today-color;
 		}
 
-		.pmu-button:hover {
-			background : $background-hover;
-			color      : $color-hover;
-		}
+	
 
 		.pmu-not-in-month {
 			color : $not-in-month;
@@ -154,8 +158,35 @@ $today-color                      : white; //$color-hover !default;
 				width       : 2.8em;//2em;
 				position: relative;
 			}
+			/*.pmu-button::before {
+					//color: blue;
+					background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+					border-radius: 22px;
+					display: block;
+					position: absolute;
+					content: "";
+					width: 100%;
+					top: 0;
+					height: 100%;
+					color: white;
+			}*/
 			.pmu-begin {
 				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				border-radius: 22px;
+				display: block;
+				position: absolute;
+				content: "";
+				width: 100%;
+				top: 0;
+				height: 100%;
+				color: white;
+				/*&:hover {
+					display: none;
+				}*/
+			}
+			.pmu-today_inrange {
+				background: linear-gradient(180deg, transparentize(#6FCF97, 0.25) 0%, transparentize(#66D2EA, 0.25) 100%);
+				//background: linear-gradient(180deg, transparentize(#BC9CFF, 0.75) 0%, transparentize(#8BA4F9, 0.75) 100%);
 				border-radius: 22px;
 				display: block;
 				position: absolute;
@@ -179,6 +210,7 @@ $today-color                      : white; //$color-hover !default;
 				//background-color: red;
 				border-radius: 22px;
 			}
+			
 		}
 
 		.pmu-day-of-week * {
