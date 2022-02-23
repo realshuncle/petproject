@@ -528,18 +528,19 @@
 					}
 					if (val === today) {
 						if (day_element.classList.contains('pmu-selected')) {
+							dom_add_class(day_element, 'pmu-today_inrange');
 							//console.log("TODAY");
-							temp = document.createElement('div');
-							temp.textContent = Number(local_date.getDate());
-							dom_add_class(temp, 'pmu-today_inrange');
+							////temp = document.createElement('div');
+							////temp.textContent = Number(local_date.getDate());
+							////dom_add_class(temp, 'pmu-today_inrange');
 							/*if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
 								dom_add_class(day_element, 'pmu-selected_begin');
 							else
 								dom_add_class(day_element, 'pmu-selected_none');*/
 							//temp.appendChild(day_element);
-							day_element.appendChild(temp);
+							////day_element.appendChild(temp);
 							//dom_add_class(day_element, 'pmu-today');
-							}
+						}
 						else {
 							dom_add_class(day_element, 'pmu-today');
 						}
@@ -551,27 +552,28 @@
 						);
 					}
 					if (JSON.stringify(options.date[0]) == JSON.stringify(local_date)) {
-						temp = document.createElement('div');
-						temp.textContent = Number(local_date.getDate());
-						dom_add_class(temp, 'pmu-begin');
+						//temp = document.createElement('div');
+						//temp.textContent = Number(local_date.getDate());
+						//dom_add_class(temp, 'pmu-begin');
 						if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
 							dom_add_class(day_element, 'pmu-selected_begin');
 						else
 							dom_add_class(day_element, 'pmu-selected_none');
+						//day_element.before.textContent = Number(local_date.getDate());
 						//temp.appendChild(day_element);
-						day_element.appendChild(temp);
+						//day_element.appendChild(temp);
 						//day_element = temp;
 					}
 					else if (JSON.stringify(options.date[1]) == JSON.stringify(local_date)) {
-						temp = document.createElement('div');
-						temp.textContent = Number(local_date.getDate());
-						dom_add_class(temp, 'pmu-begin');
+						//temp = document.createElement('div');
+						//temp.textContent = Number(local_date.getDate());
+						//dom_add_class(temp, 'pmu-begin');
 						if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
 							dom_add_class(day_element, 'pmu-selected_end');
 						else
 							dom_add_class(day_element, 'pmu-selected_none');
 						//temp.appendChild(day_element);
-						day_element.appendChild(temp);
+						//day_element.appendChild(temp);
 						//day_element = temp;
 					}
 						
