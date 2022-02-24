@@ -373,6 +373,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     mode : 'range',
     prev : '',
     next : '',
+    title_format	: 'B Y',
     //positions : 'top',
     
     //flat : true,
@@ -396,6 +397,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
   dateDropdown.addEventListener('pickmeup-change', function (e) {
     dropdowns[0].value = e.detail.formatted_date[0];
     dropdowns[1].value = e.detail.formatted_date[1];
+    //btn.classList.add("button-clear_hide");
   })
   
   let pmu = document.querySelectorAll(".pickmeup");
@@ -413,19 +415,37 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
   let btn = document.createElement("button");
   btn.textContent = "очистить";
   btn.setAttribute("type", "button");
+  btn.setAttribute("disabled", "disabled");
   btn.addEventListener("click", function() {
-    x.clear();
+    //x.clear();
+    x.set_date();
     dropdowns[0].value = "";
     dropdowns[1].value = "";
+    this.setAttribute("disabled", "disabled");
+    this.classList.add("button-clear_hide");
     //alert('fd');
   })
- 
+  btn.classList.add("button");
+  btn.classList.add("button-clear_hide");
+
+  dateDropdown.addEventListener('pickmeup-change', function (e) {
+    //dropdowns[0].value = e.detail.formatted_date[0];
+    //dropdowns[1].value = e.detail.formatted_date[1];
+    let x = dateDropdown.querySelector(".button-clear_hide");
+    x.removeAttribute("disabled");
+    //btn.classList.add("sbutton-clear_hide");
+    x.classList.remove("button-clear_hide");
+    //alert('lol');
+  })
+
   dv.appendChild(btn);
 
   btn = document.createElement("button");
   btn.textContent = "применить";
   btn.setAttribute("type", "button");
-  btn.classList.add("prim");
+  btn.classList.add("button-apply");
+  btn.classList.add("button");
+
   /*btn.addEventListener("click", function() {
     //x.hide();
     //pmu.classList.add("pmu-hidden");

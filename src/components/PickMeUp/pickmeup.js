@@ -1056,7 +1056,7 @@
 		//noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures
 		if (
 			!event || !event.target ||										//Called directly
-			event.target.classList.contains('prim') ||
+			event.target.classList.contains('button-apply') ||
 			(
 				event.target !== target &&									//Clicked not on element itself
 				!(root_element.compareDocumentPosition(event.target) & 16)	//And not on its children
@@ -1091,6 +1091,7 @@
 	 * @param {Element} target
 	 */
 	function clear (target) {
+		//alert('lol');
 		var options = target.__pickmeup.options;
 		if (options.mode !== 'single') {
 			options.date    = [];
