@@ -1,40 +1,38 @@
 @import '../../theme/colors.scss';
 
+
 .form {
+  .button {
+    background: none;
+    color: $primary_color;
+    border: none;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .button-clear_hide {
+    opacity: 0; 
+  }
   .pmu-div {
     position: absolute;
     top: 44px;
     border					: 1px solid $text_color25;
     border-radius: 4px;
     box-sizing: border-box;
-    //display: inline-block;
-    //width: 0px;
-    //background-color: red;
-    * {
-      
-      }
-      
     }
   .pmu-buttons-bar {
     display: flex;
+    //flex-direction: row-reverse;
     justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    button {
-      background: none;
-      color: $primary_color;
-      border: none;
-      font-family: Montserrat;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 15px;
-      letter-spacing: 0em;
-      text-align: left;
-      text-transform: uppercase;
-
-    }
+    padding-left: 1.429em;
+    padding-right: 1.429em;
+    padding-bottom: 1.429em;
+    
   }
   .pmu-div_hidden {
     display: none;
