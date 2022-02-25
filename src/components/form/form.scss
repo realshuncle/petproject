@@ -75,9 +75,26 @@
       //background-opacity: 0.2;
     }
   }
+  &__dropdown-with-menu {
+    position: relative;
+  }
   &__dropdown-menu {
-    
-    display: none;
+
+    &_hidden {
+      display: none;
+    }
+    .pmu-buttons-bar {
+      display: flex;
+      //flex-direction: row-reverse;
+      justify-content: space-between;
+      padding-left: 0em;
+      padding-right: 0em;
+      padding-top: 0.858em;
+      padding-bottom: 0.93em;
+      
+    }
+   	//z-index: 1;
+    //display: none;
     flex-direction: column;
     box-sizing: border-box;
 
@@ -87,7 +104,7 @@
 
     padding-top: 7px;
     padding-right: 7px;
-    padding-bottom: 7px;
+    //padding-bottom: 7px;
     padding-left: 15px;
 
     border: 1px solid $text_color25;

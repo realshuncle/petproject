@@ -1,20 +1,12 @@
-
 import pickmeup from "../PickMeUp/pickmeup.js"
-import AirDatepicker from 'air-datepicker'
 import 'air-datepicker/air-datepicker.css'
 import $ from "jquery";
 
 let elements = document.querySelectorAll(".form__dropdown-menu-el");
-let dropdown_menu_buttons = document.querySelectorAll(
-  ".form__dropdown-menu-button"
-);
-let dropdowns_with_menu = document.querySelectorAll(
-  ".form__dropdown-with-menu"
-);
 
 //для каждой кнопки .form__dropdown-menu-button добавляем обработчик,
 //который уменьшает или увеличивает количество
-for (let btn of dropdown_menu_buttons) {
+for (let btn of document.querySelectorAll(".form__dropdown-menu-button")) {
   btn.addEventListener("click", function () {
     let count;
     let name;
@@ -65,16 +57,17 @@ for (let btn of dropdown_menu_buttons) {
     this.parentNode.parentNode.parentNode.previousElementSibling.querySelector('.form__dropdown').value = inputStr;
   });
 }
-
-for (let dropdown of dropdowns_with_menu) {
-
-  dropdown.querySelector('.form__dropdown').addEventListener("click", function () {
-    let menu = this.parentNode.parentNode.querySelector('.form__dropdown-menu');
-    if (getComputedStyle(menu).display == 'none')
-      menu.style = "display: flex";
-    else
-    menu.style = "display: none";
-    //this.nextElementSibling
+//код для дропдаунов с меню
+for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
+  let menu = dwm.parentNode.parentNode.querySelector('.form__dropdown-menu');
+  menu.classList.add('form__dropdown-menu_hidden');
+  dwm.querySelector('.form__dropdown').addEventListener("click", function () {
+    if (menu.classList.contains('form__dropdown-menu_hidden')) {
+      menu.classList.remove('form__dropdown-menu_hidden');
+    }
+    else {
+      menu.classList.add('form__dropdown-menu_hidden');
+    }
   });
 }
 
@@ -351,11 +344,9 @@ for (let input of inputs) {
     if (this.value == "__.__.____") this.value = "";
   });
 }
-//console.log(x.pickmeup('.form__date-masked'));
+//создание календаря для date-dropdown
 for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow")) {
-  let options = {
-    //locale: 'ru',
-  };
+  //настройки календаря (локализация)
   pickmeup.defaults.locales['ru'] = {
     days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
     daysShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
@@ -363,166 +354,76 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
     monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
   };
+  //дропдауны для которых создается календарь
   let dropdowns = dateDropdown.querySelectorAll(".form__dropdown_date-dropdown");
-  //dropdowns[0]
-  //let btne = btnb.nextSibling.nextSibling;
-  //console.log(btne);
-  let x = pickmeup(dateDropdown, {
+  //создается класс календаря
+  let pmu_class = pickmeup(dateDropdown, {
     locale : 'ru',
     format	: 'd.m.Y',
     mode : 'range',
     prev : '',
     next : '',
     title_format	: 'B Y',
-    //positions : 'top',
-    
-    //flat : true,
   });
-  /*let temp = document.querySelector(".pickmeup");
-  console.log(temp, e);
-  let y = document.createElement("div");
-  y.classList.add("pmu-buttons-bar");
-  y.textContent = "sdfdsfdsfdssssssssssssssss";
-  y.appendChild(temp);
-  document.body.appendChild(y);*/
-  //console.log(x);
-//console.log(dateDropdown);
-  //x.
-  dropdowns[0].addEventListener('click', function() {
-    x.show();
-  });
-  dropdowns[1].addEventListener('click', function() {
-    x.show();
-  });
+    //выбор необходимого календаря
+  let pmu = document.querySelectorAll(".pickmeup");
+  pmu = pmu[pmu.length - 1];
+  //обертка календаря
+  let pmu_div = document.createElement("div");
+  pmu_div.classList.add("pmu-div");
+  pmu_div.classList.add('pmu-div_hidden');
+  //панель с кнопками
+  let butbar = document.createElement("div");
+  butbar.classList.add("pmu-buttons-bar")
+  //кнопка очистки
+  let btnClear = document.createElement("button");
+
+  btnClear.textContent = "очистить";
+  btnClear.setAttribute("type", "button");
+  btnClear.setAttribute("disabled", "disabled");
+  btnClear.classList.add("button");
+  btnClear.classList.add("button-clear_hide");
+
+  btnClear.addEventListener("click", function() {
+    //сброс календаря
+    pmu_class.set_date();
+    //очитска полей
+    dropdowns[0].value = "";
+    dropdowns[1].value = "";
+    //деактивация кнопки
+    this.setAttribute("disabled", "disabled");
+    this.classList.add("button-clear_hide");
+  })
+  //кнопка применить
+  let btnApply = document.createElement("button");
+  btnApply.textContent = "применить";
+  btnApply.setAttribute("type", "button");
+  btnApply.classList.add("button-apply");
+  btnApply.classList.add("button");
+ 
+  butbar.appendChild(btnApply);
+  butbar.appendChild(btnClear);
+
+  pmu_div.appendChild(pmu);
+  pmu_div.append(butbar);
+  
+  dateDropdown.appendChild(pmu_div);
+
+  //перенос даты в input
   dateDropdown.addEventListener('pickmeup-change', function (e) {
     dropdowns[0].value = e.detail.formatted_date[0];
     dropdowns[1].value = e.detail.formatted_date[1];
-    //btn.classList.add("button-clear_hide");
+    //показ и активация кнопки очистки после внесения изменений
+    let clearBtn = dateDropdown.querySelector(".button-clear_hide");
+    clearBtn?.removeAttribute("disabled");
+    clearBtn?.classList.remove("button-clear_hide");
   })
-  
-  let pmu = document.querySelectorAll(".pickmeup");
-  //console.log(pmu[pmu.length - 1]);
-  /*for (let pmu of document.querySelectorAll(".pickmeup")) {
-  }*/
-  pmu = pmu[pmu.length - 1];
-  let y = document.createElement("div");
-  y.classList.add("pmu-div");
-  
-
-  let dv = document.createElement("div");
-  dv.classList.add("pmu-buttons-bar")
-
-  let btn = document.createElement("button");
-  btn.textContent = "очистить";
-  btn.setAttribute("type", "button");
-  btn.setAttribute("disabled", "disabled");
-  btn.addEventListener("click", function() {
-    //x.clear();
-    x.set_date();
-    dropdowns[0].value = "";
-    dropdowns[1].value = "";
-    this.setAttribute("disabled", "disabled");
-    this.classList.add("button-clear_hide");
-    //alert('fd');
-  })
-  btn.classList.add("button");
-  btn.classList.add("button-clear_hide");
-
-  dateDropdown.addEventListener('pickmeup-change', function (e) {
-    //dropdowns[0].value = e.detail.formatted_date[0];
-    //dropdowns[1].value = e.detail.formatted_date[1];
-    let x = dateDropdown.querySelector(".button-clear_hide");
-    x.removeAttribute("disabled");
-    //btn.classList.add("sbutton-clear_hide");
-    x.classList.remove("button-clear_hide");
-    //alert('lol');
-  })
-
-  dv.appendChild(btn);
-
-  btn = document.createElement("button");
-  btn.textContent = "применить";
-  btn.setAttribute("type", "button");
-  btn.classList.add("button-apply");
-  btn.classList.add("button");
-
-  /*btn.addEventListener("click", function() {
-    //x.hide();
-    //pmu.classList.add("pmu-hidden");
-    //alert('lol');
-    //dropdowns[0].value = "";
-    //dropdowns[1].value = "";
-    //alert('fd');
-  })*/
- 
-  dv.appendChild(btn);
-
-  y.appendChild(pmu);
-  y.append(dv);
-  y.classList.add('pmu-div_hidden');
-  /*btn.setAttribute("type", "button");
-  btn.addEventListener("click", function() {
-    x.clear();
-    dropdowns[0].value = "";
-    dropdowns[1].value = "";
-    //alert('fd');
-  })*/
-  /*pmu.addEventListener("blur", function() {
-    alert(lol);
-  })
-  y.addEventListener("blur", function() {
-    alert("lol");
-  })*/
-
-  //y.textContent = "sdfdsfdsfdssssssssssssssss";
-  
-  //document.body.appendChild(y)
-  dateDropdown.appendChild(y);
+  //скрытиие и показ обертки календаря
   dateDropdown.addEventListener('pickmeup-hide', function (e) {
-    y.classList.add('pmu-div_hidden');
-    //alert('lol');
+    pmu_div.classList.add('pmu-div_hidden');
   })
   dateDropdown.addEventListener('pickmeup-show', function (e) {
-    y.classList.remove('pmu-div_hidden');
-    //alert('lol');
+    pmu_div.classList.remove('pmu-div_hidden');
   })
-  //}
-  /*dateDropdown.addEventListener('pickmeup-init', function (e) {
-    alert('CREATE');
-  })*/
-  /*dateDropdown.addEventListener('pickmeup-fill', function (e) {
-    alert('lol');
-    let temp = document.querySelector(".pickmeup");
-    //let t1 = temp.querySelector(".pmu-buttons-bar");
-    //if (t1) temp.removeChild(t1);
-    console.log(temp, e);
-    let y = document.createElement("div");
-    y.classList.add("pmu-buttons-bar");
-    y.textContent = "sdfdsfdsfdssssssssssssssss";
-    y.appendChild(temp);
-    document.body.appendChild(y);
-    //temp.appendChild(y);
-  })*/
-  //});
-  //new AirDatepicker(btn, options);
-  
 } 
-
-/*for (let pmu of document.querySelectorAll(".pickmeup")) {
-  let y = document.createElement("div");
-  y.classList.add("pmu-buttons-bar");
-  let btn = document.createElement("button");
-  
-  y.textContent = "sdfdsfdsfdssssssssssssssss";
-  y.appendChild(btn);
-  y.appendChild(pmu);
-  document.body.appendChild(y)
-}*/
-/*let temp = document.querySelector(".pickmeup");
-console.log(temp, e);
-let y = document.createElement("div");
-y.classList.add("pmu-buttons-bar");
-y.textContent = "sdfdsfdsfdssssssssssssssss";
-y.appendChild(temp);
-document.body.appendChild(y);*/
 
