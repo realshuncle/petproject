@@ -29,6 +29,7 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
 
   let labelsArr = menu.querySelectorAll('.form__dropdown-menu-label');
   let countersArr = menu.querySelectorAll('.form__dropdown-menu-counter');
+  let elArr = menu.querySelectorAll('.form__dropdown-menu-el');
 
   function declOfNum(n, text_forms) {  
     n = Math.abs(n) % 100; 
@@ -68,7 +69,7 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
     dropDown.value = result;
   }
 
-  for (let dme of dwm.querySelectorAll('.form__dropdown-menu-el')) {
+  for (let dme of elArr) {
     let btnMinus = dme.querySelector('.form__dropdown-menu-button_minus');
     let counter = dme.querySelector('.form__dropdown-menu-counter');
     let btnPlus = dme.querySelector('.form__dropdown-menu-button_plus');
@@ -113,8 +114,11 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
     //changeDT();
   })
   btnClear.addEventListener('click', function(e){
-    for (let c of countersArr) {
-      c.innerHTML = 0;
+    for (let i = 0; i < elArr.length; i++) {
+      countersArr[i].innerHTML = 0;
+      let btnMinus = elArr[i].querySelector('.form__dropdown-menu-button_minus');
+      btnMinus.setAttribute('disabled', true);
+      btnMinus.classList.add("form__dropdown-menu-button_disabled");
     }
     btnClear.setAttribute("disabled", "disabled");
     btnClear.classList.add("button-clear_hide");
