@@ -82,6 +82,9 @@
   &__date-dropdowns {
     width: 320px;
   }
+  &__date-dropdown {
+    width: 100%;
+  }
   &__label {
     margin-bottom: 5px;
     font-size: 12px;
@@ -142,6 +145,7 @@
     align-items: center;
     flex-direction: row;
     gap: 1.5em;
+    //grid-gap: 20px;
     width: 320px;
   }
   &__dropdown-menu-el {

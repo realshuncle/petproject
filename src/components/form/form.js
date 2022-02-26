@@ -449,8 +449,10 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
     //сброс календаря
     pmu_class.set_date();
     //очитска полей
+    
     dropdowns[0].value = "";
-    dropdowns[1].value = "";
+    if (dropdowns.length != 1)
+      dropdowns[1].value = "";
     //деактивация кнопки
     this.setAttribute("disabled", "disabled");
     this.classList.add("button-clear_hide");
@@ -464,7 +466,6 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
 
   butbar.appendChild(btnClear);
   butbar.appendChild(btnApply);
- 
 
   pmu_div.appendChild(pmu);
   pmu_div.append(butbar);
@@ -481,9 +482,31 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
   }
 
   pmuPlug.addEventListener('pickmeup-change', function (e) {
-    dropdowns[0].value = e.detail.formatted_date[0];
-    dropdowns[1].value = e.detail.formatted_date[1];
+    if (dropdowns.length == 1) {
+      let resstr;
+      if (e.detail.formatted_date[0] == e.detail.formatted_date[1])
+        resstr = dropdowns[0].value = e.detail.date[0].toLocaleString("ru", {
+          month: 'short',
+          day: 'numeric'
+        });
+      else
+        resstr = dropdowns[0].value = e.detail.date[0].toLocaleString("ru", {
+          month: 'short',
+          day: 'numeric'
+        }) + " - " + e.detail.date[1].toLocaleString("ru", {
+          month: 'short',
+          day: 'numeric'
+        });
+      dropdowns[0].value = resstr.replace(/\./g, '');
+      //console.log(resstr.replace(/\./g, ''));
+    }
+    else {
+      dropdowns[0].value = e.detail.formatted_date[0];
+      dropdowns[1].value = e.detail.formatted_date[1];
+    }
+    console.log(e);
     //показ и активация кнопки очистки после внесения изменений
+    console.log('change');
     let clearBtn = dateDropdown.querySelector(".button-clear_hide");
     clearBtn?.removeAttribute("disabled");
     clearBtn?.classList.remove("button-clear_hide");

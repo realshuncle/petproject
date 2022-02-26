@@ -53,7 +53,11 @@ mixin date-dropdowns([label1, label2, mod=[]])
         input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date form__date-dropdown_end" class = mod, readonly)
     div.pmu-plug
 
-mixin date-dropdown([label1, mod=[]])
-  div.form__date-dropdown-glue
-    input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date-dropdown form__dropdown_date-dropdown_begin-end" class = mod, readonly)
+mixin date-dropdown([label, mod=[]])
+  div.form__date-dropdowns
+    div.form__date-dropdown-glue
+      div.form__date-dropdown
+        label.form__label(for="for-date") #{label}
+        input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date form__date-dropdown_range" class = mod, readonly)
+    div.pmu-plug
 
