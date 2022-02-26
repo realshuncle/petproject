@@ -1050,7 +1050,7 @@
 	function hide (target, event) {
 		var root_element = target.querySelector(".pmu-div"),//.__pickmeup.element,
 			options      = target.__pickmeup.options;//target.__pickmeup.options;
-			//console.log(root_element);
+			console.log(root_element);
 			//console.log(event.target.classList);
 			//console.log(!undefined);
 		//noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures

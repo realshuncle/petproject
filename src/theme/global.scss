@@ -49,4 +49,7 @@ input {
     border-color: $text_color50;
     //color: $text_color75;
   }
+  &::placeholder {
+    color: $text_color25; 
+  }
 }
