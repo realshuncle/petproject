@@ -38,8 +38,22 @@ mixin input-date([label, name, placeholder='ДД.ММ.ГГГГ', mod = []])
     h3 #{label}
     input(type="text", name=name, placeholder=placeholder, class="form__date-masked" class = mod)
 
-mixin date-dropdown([label1, label2, mod=[]])
-  div.form__date-dropdown-glow
-    input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date-dropdown form__dropdown_date-dropdown_begin" class = mod, readonly)
-    input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date-dropdown form__dropdown_date-dropdown_end" class = mod, readonly)
+mixin date-dropdowns([label1, label2, mod=[]])
+  //div.form__date-dropdown
+    div.form__date-dropdown-label
+      p #{label1}
+      p #{label2}
+  div.form__date-dropdowns
+    div.form__date-dropdown-glue
+      div.form__date-dropdown
+        label.form__label(for="for-date") #{label1}
+        input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date form__date-dropdown_begin" class = mod, readonly)
+      div.form__date-dropdown
+        label.form__label #{label2}
+        input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date form__date-dropdown_end" class = mod, readonly)
+    div.pmu-plug
+
+mixin date-dropdown([label1, mod=[]])
+  div.form__date-dropdown-glue
+    input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date-dropdown form__dropdown_date-dropdown_begin-end" class = mod, readonly)
 

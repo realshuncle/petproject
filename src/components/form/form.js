@@ -99,7 +99,7 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
   }
 
   document.addEventListener('click', (e) => {
-    console.log(e);
+    //console.log(e);
     const withinBoundaries = e.composedPath().includes(menu);
    
     if (!withinBoundaries && !e.composedPath().includes(dropDown)) {
@@ -395,8 +395,16 @@ for (let input of inputs) {
     if (this.value == "__.__.____") this.value = "";
   });
 }
-//создание календаря для date-dropdown
-for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow")) {
+
+/*for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glue")) {
+  for (let dpd of dateDropdown.querySelectorAll(".form__dropdown_date")) {
+    dpd.addEventListener('click') {
+
+    }
+  }
+}*/
+//создание календаря для date-dropdown .form__date-dropdown-glue
+for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
   //настройки календаря (локализация)
   pickmeup.defaults.locales['ru'] = {
     days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
@@ -405,10 +413,12 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
     monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
   };
+  //блок на который формируется календарь
+  let pmuPlug = dateDropdown.querySelector('.pmu-plug');
   //дропдауны для которых создается календарь
-  let dropdowns = dateDropdown.querySelectorAll(".form__dropdown_date-dropdown");
+  let dropdowns = dateDropdown.querySelectorAll(".form__dropdown_date");
   //создается класс календаря
-  let pmu_class = pickmeup(dateDropdown, {
+  let pmu_class = pickmeup(pmuPlug, {
     locale : 'ru',
     format	: 'd.m.Y',
     mode : 'range',
@@ -416,7 +426,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     next : '',
     title_format	: 'B Y',
   });
-    //выбор необходимого календаря
+  //выбор необходимого календаря
   let pmu = document.querySelectorAll(".pickmeup");
   pmu = pmu[pmu.length - 1];
   //обертка календаря
@@ -459,10 +469,18 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
   pmu_div.appendChild(pmu);
   pmu_div.append(butbar);
   
-  dateDropdown.appendChild(pmu_div);
+  pmuPlug.appendChild(pmu_div);
+  //dateDropdown.appendChild(pmu_div);
 
   //перенос даты в input
-  dateDropdown.addEventListener('pickmeup-change', function (e) {
+  for (let dd of dropdowns) {
+    dd.addEventListener('click', function() {
+      pmu_class.show();
+      pmu_div.classList.remove('pmu-div_hidden');
+    })
+  }
+
+  pmuPlug.addEventListener('pickmeup-change', function (e) {
     dropdowns[0].value = e.detail.formatted_date[0];
     dropdowns[1].value = e.detail.formatted_date[1];
     //показ и активация кнопки очистки после внесения изменений
@@ -471,11 +489,13 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
     clearBtn?.classList.remove("button-clear_hide");
   })
   //скрытиие и показ обертки календаря
-  dateDropdown.addEventListener('pickmeup-hide', function (e) {
+  pmuPlug.addEventListener('pickmeup-hide', function (e) {
     pmu_div.classList.add('pmu-div_hidden');
   })
-  dateDropdown.addEventListener('pickmeup-show', function (e) {
+  pmuPlug.addEventListener('pickmeup-show', function (e) {
     pmu_div.classList.remove('pmu-div_hidden');
   })
+
+  
 } 
 

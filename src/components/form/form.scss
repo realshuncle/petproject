@@ -18,9 +18,13 @@
   .button-clear_hide {
     opacity: 0; 
   }
+  .pmu-plug {
+    position: relative;
+  }
   .pmu-div {
     position: absolute;
-    top: 44px;
+    //top: 44px;
+    top: 0;
     border					: 1px solid $text_color25;
     border-radius: 4px;
     box-sizing: border-box;
@@ -61,25 +65,29 @@
     //width: 200px;
     padding-right: 40px;
     //size: 10px;
-    &_date-dropdown {
-      width: 150px;
+    &_date-dropdown-begin-end {
+      width: 100%;
     }
-    &:focus {
-      text-overflow: ellipsis;
+    &_date {
+      width: 100%;//10.72em;
     }
     cursor: pointer;
-    &::after {
-
-    }
     background-image: url(./img/expand_more_50.svg);
     background-repeat: no-repeat;
     background-position: top 17px right 15px;
     &:focus{
-      //border-color: $color-ds50;
-      //color: $color-ds75;
       background-image: url(./img/expand_more_75.svg);
-      //background-opacity: 0.2;
     }
+  }
+  &__date-dropdowns {
+    width: 320px;
+  }
+  &__label {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;
   }
   &__dropdown-with-menu {
     position: relative;
@@ -122,14 +130,18 @@
     border-radius: 4px;
 
   }
-  &__date-dropdown-glow {
-    position: relative;
-    top: 0;
+  &__date-dropdown-label {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__date-dropdown-glue {
+    //position: relative;
+    //top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-
+    gap: 1.5em;
     width: 320px;
   }
   &__dropdown-menu-el {
