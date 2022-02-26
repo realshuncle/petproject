@@ -6,61 +6,18 @@ let elements = document.querySelectorAll(".form__dropdown-menu-el");
 
 //для каждой кнопки .form__dropdown-menu-button добавляем обработчик,
 //который уменьшает или увеличивает количество
-for (let btn of document.querySelectorAll(".form__dropdown-menu-button")) {
-  btn.addEventListener("click", function () {
-    let count;
-    let name;
-    if (btn.innerHTML == "+") {
-      if (this.previousElementSibling.innerHTML == 0) {
-        this.previousElementSibling.previousElementSibling.removeAttribute('disabled');
-        this.previousElementSibling.previousElementSibling.classList.remove("form__dropdown-menu-button_disabled");
-      }
-      this.previousElementSibling.innerHTML++;
-      count = this.previousElementSibling.innerHTML;
-      name = this.parentNode.previousElementSibling.innerHTML;
-    }
-    else {
-      this.nextElementSibling.innerHTML--;
-      if (this.nextElementSibling.innerHTML == 0) {
-        this.setAttribute('disabled', true);
-        this.classList.add("form__dropdown-menu-button_disabled");
-      }
-      count = this.nextElementSibling.innerHTML;
-      name = this.parentNode.previousElementSibling.innerHTML;
-    }
-    let inputStr = this.parentNode.parentNode.parentNode.previousElementSibling.querySelector('.form__dropdown').value;
-    let indexOfComma = inputStr.indexOf(",");
-    //alert(indexOfComma);
-    if (indexOfComma == -1) {
-      inputStr = "0 спален, 0 кроватей...";
-      indexOfComma = inputStr.indexOf(",");
-    }
-    if (name.toLowerCase() == "спальни") {
-      if (count % 10 == 0 || count % 10 > 4 || count > 10 && count < 20)  name = "спален";
-      else if (count % 10 == 1) name = "спальня";
-      else if (count % 10 < 5) name = "спальни";
-      
-      inputStr = count + " " + name + inputStr.substring(indexOfComma);
-      //else if (count < 21) name = "спален";
-    }
-    if (name.toLowerCase() == "кровати") {
-      if (count % 10 == 0 || count % 10 > 4 || count > 10 && count < 20)  name = "кроватей";
-      else if (count % 10 == 1) name = "кровать";
-      else if (count % 10 < 5) name = "кровати";
-      inputStr = inputStr.substring(0, indexOfComma + 1) + " " + count + " " + name + "...";
-      //else if (count < 21) name = "спален";
-    }
-    
-    
-    //if ()
-    //this.parentNode.parentNode.parentNode.previousElementSibling.querySelector('.form__dropdown').value = count + " " + name;
-    this.parentNode.parentNode.parentNode.previousElementSibling.querySelector('.form__dropdown').value = inputStr;
-  });
-}
+
 //код для дропдаунов с меню
 for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
+  //меню дропдауна
   let menu = dwm.parentNode.parentNode.querySelector('.form__dropdown-menu');
   menu.classList.add('form__dropdown-menu_hidden');
+  //инпут дропдауна
+  let dropDown = dwm.querySelector('.form__dropdown');
+
+  let btnApply = dwm.querySelector('.button-apply');
+  let btnClear = dwm.querySelector('.button-clear');
+
   dwm.querySelector('.form__dropdown').addEventListener("click", function () {
     if (menu.classList.contains('form__dropdown-menu_hidden')) {
       menu.classList.remove('form__dropdown-menu_hidden');
@@ -69,8 +26,102 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
       menu.classList.add('form__dropdown-menu_hidden');
     }
   });
-}
 
+  let labelsArr = menu.querySelectorAll('.form__dropdown-menu-label');
+  let countersArr = menu.querySelectorAll('.form__dropdown-menu-counter');
+
+  function declOfNum(n, text_forms) {  
+    n = Math.abs(n) % 100; 
+    var n1 = n % 10;
+    if (n > 10 && n < 20) { return text_forms[2]; }
+    if (n1 > 1 && n1 < 5) { return text_forms[1]; }
+    if (n1 == 1) { return text_forms[0]; }
+    return text_forms[2];
+  }
+
+  function changeDT() {
+    //проверка являются ли все счетчики нулями
+    if (!Array.from(countersArr).reduce((sum, el) => sum + Number(el.innerHTML), 0)) {
+      dropDown.value = "";
+      return;
+    }
+    
+    let result = "";
+    for (let i = 0; i < labelsArr.length; i++) {
+
+      if (result) result += ", "; 
+
+      let label = labelsArr[i].innerHTML.toLowerCase();
+      let amount = countersArr[i].innerHTML;
+      result += amount + " ";
+      if (label == "спальни") {
+        result += declOfNum(amount, ["спальня", "спальни", "спален"]);
+      }
+      if (label == "кровати") {
+        result += declOfNum(amount, ["кровать", "кровати", "кроватей"]);
+      }
+      if (label == "ванные комнаты") {
+        result += declOfNum(amount, ["ванная комната", "ванные комнаты", "ванных комнат"]);
+      }
+    }
+
+    dropDown.value = result;
+  }
+
+  for (let dme of dwm.querySelectorAll('.form__dropdown-menu-el')) {
+    let btnMinus = dme.querySelector('.form__dropdown-menu-button_minus');
+    let counter = dme.querySelector('.form__dropdown-menu-counter');
+    let btnPlus = dme.querySelector('.form__dropdown-menu-button_plus');
+
+    btnPlus.addEventListener("click", function () {
+      if (counter.innerHTML == 0) {
+        btnMinus.removeAttribute('disabled');
+        btnMinus.classList.remove('form__dropdown-menu-button_disabled');
+      }
+      counter.innerHTML++;
+      btnClear.removeAttribute("disabled", "disabled");
+      btnClear.classList.remove("button-clear_hide");
+      changeDT();
+    });
+
+    btnMinus.addEventListener("click", function () {
+      counter.innerHTML--;
+      if (counter.innerHTML == 0) {
+        btnMinus.setAttribute('disabled', true);
+        btnMinus.classList.add("form__dropdown-menu-button_disabled");
+      }
+      if (!Array.from(countersArr).reduce((sum, el) => sum + Number(el.innerHTML), 0)) {
+        btnClear.setAttribute("disabled", "disabled");
+        btnClear.classList.add("button-clear_hide");
+      }
+      changeDT();
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    console.log(e);
+    const withinBoundaries = e.composedPath().includes(menu);
+   
+    if (!withinBoundaries && !e.composedPath().includes(dropDown)) {
+      menu.classList.add('form__dropdown-menu_hidden');// скрываем элемент т к клик был за его пределами
+      changeDT();
+    }
+  })
+  
+  btnApply.addEventListener('click', function(e){
+    menu.classList.add('form__dropdown-menu_hidden');
+    //changeDT();
+  })
+  btnClear.addEventListener('click', function(e){
+    for (let c of countersArr) {
+      c.innerHTML = 0;
+    }
+    btnClear.setAttribute("disabled", "disabled");
+    btnClear.classList.add("button-clear_hide");
+    //menu.classList.add('form__dropdown-menu_hidden');
+    changeDT();
+  })
+}
 
 //плагин для маски инпута
 let inputs = document.querySelectorAll(".form__date-masked");
@@ -400,9 +451,10 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdown-glow"))
   btnApply.setAttribute("type", "button");
   btnApply.classList.add("button-apply");
   btnApply.classList.add("button");
- 
-  butbar.appendChild(btnApply);
+
   butbar.appendChild(btnClear);
+  butbar.appendChild(btnApply);
+ 
 
   pmu_div.appendChild(pmu);
   pmu_div.append(butbar);
