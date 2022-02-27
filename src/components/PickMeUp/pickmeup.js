@@ -126,17 +126,14 @@
 	 * @param {Function}         callback
 	 */
 	function dom_on (target, element, event, callback) {
-		//console.log(target, element, event, callback);
 		if (event.indexOf(' ') !== -1) {
 			var events        = event.split(' '),
 				events_number = events.length,
 				i;
 			for (i = 0; i < events_number; ++i) {
-				//console.log(events[i]);
 				dom_on(target, element, events[i], callback);
 			}
 		} else {
-			//console.log(element);
 			target.__pickmeup.events.push([element, event, callback]);
 			element.addEventListener(event, callback);
 		}
@@ -458,7 +455,6 @@
 						dom_add_class(month_element, 'pmu-disabled');
 					} else if (is_months_selected(current_year, month)) {
 						dom_add_class(month_element, 'pmu-selected');
-						//alert('stop');
 					}
 					months_elements.push(month_element);
 				}
@@ -486,16 +482,6 @@
 					day_element.textContent      = local_date.getDate();
 					day_element.__pickmeup_day   = local_date.getDate();
 					day_element.__pickmeup_month = local_date.getMonth();
-					//console.log(options.date[0]);
-					//console.log(options.date[1]);
-					//console.log(options.date[0], local_date);
-					//console.log(day_element);
-					/*if (JSON.stringify(options.date[0]) == JSON.stringify(local_date))
-						console.log(local_date);
-					if (JSON.stringify(options.date[1]) == JSON.stringify(local_date))
-						console.log(local_date);*/
-					//console.log("");
-					//STOP
 					day_element.__pickmeup_year  = local_date.getFullYear();
 					if (current_month !== local_date.getMonth()) {
 						dom_add_class(day_element, 'pmu-not-in-month');
@@ -525,24 +511,11 @@
 					if (from_user.disabled || (!('disabled' in from_user) && disabled)) {
 						dom_add_class(day_element, 'pmu-disabled');
 					} else if (from_user.selected || (!('selected' in from_user) && selected)) {
-						//console.log(day_element);
 						dom_add_class(day_element, 'pmu-selected');
-					//	alert('LOL');
 					}
 					if (val === today) {
 						if (day_element.classList.contains('pmu-selected')) {
 							dom_add_class(day_element, 'pmu-today_inrange');
-							//console.log("TODAY");
-							////temp = document.createElement('div');
-							////temp.textContent = Number(local_date.getDate());
-							////dom_add_class(temp, 'pmu-today_inrange');
-							/*if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
-								dom_add_class(day_element, 'pmu-selected_begin');
-							else
-								dom_add_class(day_element, 'pmu-selected_none');*/
-							//temp.appendChild(day_element);
-							////day_element.appendChild(temp);
-							//dom_add_class(day_element, 'pmu-today');
 						}
 						else {
 							dom_add_class(day_element, 'pmu-today');
@@ -555,29 +528,16 @@
 						);
 					}
 					if (JSON.stringify(options.date[0]) == JSON.stringify(local_date)) {
-						//temp = document.createElement('div');
-						//temp.textContent = Number(local_date.getDate());
-						//dom_add_class(temp, 'pmu-begin');
 						if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
 							dom_add_class(day_element, 'pmu-selected_begin');
 						else
 							dom_add_class(day_element, 'pmu-selected_none');
-						//day_element.before.textContent = Number(local_date.getDate());
-						//temp.appendChild(day_element);
-						//day_element.appendChild(temp);
-						//day_element = temp;
 					}
 					else if (JSON.stringify(options.date[1]) == JSON.stringify(local_date)) {
-						//temp = document.createElement('div');
-						//temp.textContent = Number(local_date.getDate());
-						//dom_add_class(temp, 'pmu-begin');
 						if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
 							dom_add_class(day_element, 'pmu-selected_end');
 						else
 							dom_add_class(day_element, 'pmu-selected_none');
-						//temp.appendChild(day_element);
-						//day_element.appendChild(temp);
-						//day_element = temp;
 					}
 						
 					days_elements.push(day_element);
@@ -968,7 +928,6 @@
 	function show (target, force) {
 		var root_element = target.__pickmeup.element,
 			value;
-		//console.log('lol');
 		if (force || dom_has_class(root_element, 'pmu-hidden')) {
 			var options  = target.__pickmeup.options,
 				position = dom_offset(target),
@@ -1002,7 +961,6 @@
 			if (!dom_dispatch_event(target, 'show')) {
 				return;
 			}
-			//console.log(options.flat);
 			if (!options.flat) {
 				dom_remove_class(root_element, 'pmu-hidden');
 				if (options.position instanceof Function) {
@@ -1039,8 +997,6 @@
 					left += 'px';
 					top += 'px';
 				}
-				//root_element.style.left = left;
-				//root_element.style.top  = top;
 				setTimeout(function () {
 					dom_on(target, document.documentElement, 'click', options.bound.hide);
 					dom_on(target, window, 'resize', options.bound.forced_show);
@@ -1056,9 +1012,6 @@
 	function hide (target, event) {
 		var root_element = target.querySelector(".pmu-div"),//.__pickmeup.element,
 			options      = target.__pickmeup.options;//target.__pickmeup.options;
-			//console.log(root_element);
-			//console.log(event.target.classList);
-			//console.log(!undefined);
 		//noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures
 		if (
 			!event || !event.target ||										//Called directly
@@ -1069,13 +1022,7 @@
 			)
 		) {
 			if (dom_dispatch_event(target, 'hide')) {
-				//console.log('INIF');
-				//dom_add_class(root_element, 'pmu-hidden');
-				//dom_off(target, document.documentElement, 'click', options.bound.hide);
-				//dom_off(target, window, 'resize', options.bound.forced_show);
-
 				dom_add_class(target.__pickmeup.element, 'pmu-hidden');
-				//console.log(target.__pickmeup.element);
 				dom_off(target, document.documentElement, 'click', options.bound.hide);
 				dom_off(target, window, 'resize', options.bound.forced_show);
 				options.lastSel = false;
@@ -1097,7 +1044,6 @@
 	 * @param {Element} target
 	 */
 	function clear (target) {
-		//alert('lol');
 		var options = target.__pickmeup.options;
 		if (options.mode !== 'single') {
 			options.date    = [];
@@ -1366,7 +1312,6 @@
 			} else {
 				dom_add_class(element, 'pmu-hidden');
 				document.body.appendChild(element);
-				//console.log('dsd');
 				dom_on(target, target, 'click', show.bind(target, target, false));
 				dom_on(target, target, 'input', options.bound.update);
 				dom_on(target, target, 'change', options.bound.update);
