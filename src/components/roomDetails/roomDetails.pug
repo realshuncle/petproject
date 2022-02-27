@@ -1,0 +1,10 @@
+mixin roomDetails(inform)
+  .roomDetails
+    each inf in inform
+      .roomDetails__Glue(class = inf[0])
+        .roomDetails__Label #{inf[1]}
+        .roomDetails__Text #{inf[2]}
+      .roomDetails__line
+
+
+

@@ -1,0 +1,43 @@
+@import '../../theme/colors.scss';
+
+.roomDetails {
+  width: 291px;
+  display: flex;
+  flex-direction: column;
+  padding-right: 11px;
+  &__Glue {
+    width: 100%;
+    padding-left: 58px;   
+    background-repeat: no-repeat;
+    background-position: 4px center;
+    &_inserEmoticon {
+      background-image: url('./img/insert_emoticon.svg');
+    }
+    &_locationCity {
+      background-image: url('./img/location_city.svg');
+    }
+  }
+  &__Label {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  &__Text {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  &__line:not(:last-child) {
+    margin-top: 17px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid transparentize($text_color, 0.9);
+  }
+}
