@@ -126,14 +126,17 @@
 	 * @param {Function}         callback
 	 */
 	function dom_on (target, element, event, callback) {
+		//console.log(target, element, event, callback);
 		if (event.indexOf(' ') !== -1) {
 			var events        = event.split(' '),
 				events_number = events.length,
 				i;
 			for (i = 0; i < events_number; ++i) {
+				//console.log(events[i]);
 				dom_on(target, element, events[i], callback);
 			}
 		} else {
+			//console.log(element);
 			target.__pickmeup.events.push([element, event, callback]);
 			element.addEventListener(event, callback);
 		}
@@ -581,7 +584,7 @@
 					// Move to the next day
 					date_add_days(local_date, 1);
 				}
-				instance.appendChild(options.instance_content_template(days_elements, ['pmu-days', 'lol']));
+				instance.appendChild(options.instance_content_template(days_elements, ['pmu-days']));
 			})();
 		}
 		shown_date_from.setDate(1);
@@ -965,6 +968,7 @@
 	function show (target, force) {
 		var root_element = target.__pickmeup.element,
 			value;
+		//console.log('lol');
 		if (force || dom_has_class(root_element, 'pmu-hidden')) {
 			var options  = target.__pickmeup.options,
 				position = dom_offset(target),
@@ -994,9 +998,11 @@
 				);
 				options.lastSel = false;
 			}
+			
 			if (!dom_dispatch_event(target, 'show')) {
 				return;
 			}
+			//console.log(options.flat);
 			if (!options.flat) {
 				dom_remove_class(root_element, 'pmu-hidden');
 				if (options.position instanceof Function) {
@@ -1050,7 +1056,7 @@
 	function hide (target, event) {
 		var root_element = target.querySelector(".pmu-div"),//.__pickmeup.element,
 			options      = target.__pickmeup.options;//target.__pickmeup.options;
-			console.log(root_element);
+			//console.log(root_element);
 			//console.log(event.target.classList);
 			//console.log(!undefined);
 		//noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures
@@ -1360,6 +1366,7 @@
 			} else {
 				dom_add_class(element, 'pmu-hidden');
 				document.body.appendChild(element);
+				//console.log('dsd');
 				dom_on(target, target, 'click', show.bind(target, target, false));
 				dom_on(target, target, 'input', options.bound.update);
 				dom_on(target, target, 'change', options.bound.update);
