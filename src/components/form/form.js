@@ -102,7 +102,7 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
   document.addEventListener('click', (e) => {
     //console.log(e);
     const withinBoundaries = e.composedPath().includes(menu);
-   
+
     if (!withinBoundaries && !e.composedPath().includes(dropDown)) {
       menu.classList.add('form__dropdown-menu_hidden');// скрываем элемент т к клик был за его пределами
       changeDT();
@@ -451,6 +451,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
 
   btnClear.addEventListener("click", function() {
     //сброс календаря
+    pmu_class.clear();
     pmu_class.set_date();
     //очитска полей
     
@@ -508,9 +509,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
       dropdowns[0].value = e.detail.formatted_date[0];
       dropdowns[1].value = e.detail.formatted_date[1];
     }
-    console.log(e);
     //показ и активация кнопки очистки после внесения изменений
-    console.log('change');
     let clearBtn = dateDropdown.querySelector(".button-clear_hide");
     clearBtn?.removeAttribute("disabled");
     clearBtn?.classList.remove("button-clear_hide");
@@ -525,4 +524,42 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
 
   
 } 
+
+for (let checkboxListBtn of document.querySelectorAll(".form__checkbox-list-btn")) {
+  let checkboxLabel= checkboxListBtn.querySelector(".form__label");
+  let checkboxList = checkboxListBtn.querySelector(".form__checkbox-list");
+  document.addEventListener('click', (e) => {
+    const flag1 = e.composedPath().includes(checkboxListBtn);
+    const flag2 = e.composedPath().includes(checkboxLabel);
+    if (flag1 && flag2) {
+      if (checkboxList.classList.contains("form__checkbox-list_hidden")) {
+        checkboxList.classList.remove("form__checkbox-list_hidden")
+        checkboxLabel.classList.add("form__label_up");
+      }
+      else {
+        checkboxList.classList.add("form__checkbox-list_hidden")
+        checkboxLabel.classList.remove("form__label_up");
+      }
+
+    }
+  })
+  /*document.addEventListener('dblclick', (e) => {
+    console.log('adasdas');
+    const flag1 = e.composedPath().includes(checkboxListBtn);
+    const flag2 = e.composedPath().includes(checkboxLabel);
+    if (flag1 && flag2) {
+      e.preventDefault();
+      /*if (checkboxList.classList.contains("form__checkbox-list_hidden")) {
+        checkboxList.classList.remove("form__checkbox-list_hidden")
+        checkboxLabel.classList.add("form__label_up");
+      }
+      else {
+        checkboxList.classList.add("form__checkbox-list_hidden")
+        checkboxLabel.classList.remove("form__label_up");
+      }
+
+    }
+  })*/
+  //checkboxList.querySelector(".form__label")
+}
 
