@@ -84,5 +84,22 @@ mixin checkboxList([label, cbNames=[]])
             input.form__checkbox(type="checkbox")
             .form__checkbox-list-label #{n}            
         
+mixin radioButtons([label, btlabels = []])
+  .form__radioButtonsDiv
+    .form__label #{label}
+    .form__radioButtons
+      each eb in btlabels
+        label.form__radioButton
+          input(type = "radio" name="radio")
+          .form__rblabel #{eb}
+
+mixin toggleButtons([label, btlabels = []])
+  .form__toggleButtonsDiv
+    .form__label #{label}
+    .form__toggleButtons
+      each eb in btlabels
+        label.form__toggleButton
+          input.form__checkbox(type = "checkbox")
+          .form__tblabel #{eb}
 
 

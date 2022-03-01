@@ -24,6 +24,7 @@
   .pmu-div {
     background-color: white;
     position: absolute;
+    z-index: 2;
     //top: 44px;
     top: 0;
     border					: 1px solid $text_color25;
@@ -304,4 +305,107 @@
       display: none;
     }
   }
+  &__radioButtonsDiv {
+    width: 320px;
+  }
+  &__radioButtons {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+  }
+  &__radioButton {
+    position: relative;
+    input[type = "radio"] {
+      height: 20px;
+      width: 20px;
+      opacity: 0;
+    }
+    input[type = "radio"]:checked{
+      + .form__rblabel::before {
+      //box-shadow: 0 0 0 -1px #fff, 0 0 0 12px #888;
+      //width: 19px;
+      //height: 19px;
+      //outline: solid 1px $primary_color#888;
+      background-image: url('./img/radioButtonChecked.svg');
+      background-repeat: no-repeat;
+      background-position-x: center;
+      background-position-y: center;
+      border-color: $primary_color;
+      //background: black;
+      //background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%), 
+      //radial-gradient(white, transparent 100%, white);
+      //background-size: 50% 50%, 100%;
+      //background-repeat: no-repeat;
+      //background-position: center, center;
+      }
+      + .form__rblabel {
+        color: $text_color75;
+      }
+    } 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__rblabel {
+    //font-family: Montserrat;
+   // font-size: 14px;
+    //font-style: normal;
+    //font-weight: 400;
+    //line-height: 24px;
+    //letter-spacing: 0em;
+    //text-align: left;
+    color: $text_color50;
+    &::before {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $text_color25;
+      border-radius: 10px;
+    }
+  }
+  &__toggleButtonsDiv {
+
+  }
+  &__toggleButtons { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__toggleButton {
+    display: flex;
+    position: relative;
+
+  }
+  &__tblabel {
+    padding-left: 30px;
+  }
+  &__tblabel::before {
+    transition: .4s;
+    width: 40px;
+    height: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    border: 1px solid $text_color25;
+    border-radius: 10px;
+    background-image: url('./img/toggle.svg');
+    background-size: 0.8571428571428571em 0.9230769230769231em;
+    background-repeat: no-repeat;
+    background-position: center left 4px;
+  }
+  &__checkbox:checked + &__tblabel::before {
+    transition: .4s;
+    background-image: url('./img/toggleChecked.svg');
+    background-repeat: no-repeat;
+    background-position: center right 4px;
+    border-color: $primary_color;
+  }
+
 }
