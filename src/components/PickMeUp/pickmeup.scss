@@ -86,7 +86,9 @@ $color-highlighted								: white;
 		.pmu-not-in-month {
 			color : $not-in-month;
 		}
-
+		.pmu-not-in-month.pmu-today {
+			color : $today-color;
+		}
 		.pmu-disabled,
 		.pmu-disabled:hover {
 			color  : $disabled;
