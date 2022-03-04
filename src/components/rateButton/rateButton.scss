@@ -15,6 +15,7 @@
     background-image: url('./img/star_border.svg');
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: 2em, 2em;
     cursor: pointer;
   }
   .rateButton:nth-child(1):checked ~ .star:nth-of-type(-n + 1),
@@ -25,4 +26,21 @@
   {
     background-image: url('./img/star.svg');
   }
+  .rateButton:nth-child(1):hover ~ .star:nth-of-type(n - 1),
+  .rateButton:nth-child(2):hover ~ .star:nth-of-type(n - 2),
+  .rateButton:nth-child(3):hover ~ .star:nth-of-type(n - 3),
+  .rateButton:nth-child(4):hover ~ .star:nth-of-type(n - 4),
+  .rateButton:nth-child(5):hover ~ .star:nth-of-type(n - 5)
+  {
+    background-image: url('./img/star_border.svg');
+  }
+  .rateButton:nth-child(1):hover ~ .star:nth-of-type(-n + 1),
+  .rateButton:nth-child(2):hover ~ .star:nth-of-type(-n + 2),
+  .rateButton:nth-child(3):hover ~ .star:nth-of-type(-n + 3),
+  .rateButton:nth-child(4):hover ~ .star:nth-of-type(-n + 4),
+  .rateButton:nth-child(5):hover ~ .star:nth-of-type(-n + 5)
+  {
+    background-image: url('./img/star.svg');
+  }
+
 }
