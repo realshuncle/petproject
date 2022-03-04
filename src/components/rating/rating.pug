@@ -1,0 +1,7 @@
+mixin rating(index)
+  .rating
+    - for (let i = 0; i < 5; i++)
+      if (i < index)  
+        .rating__star.rating__star_checked
+      else
+        .rating__star
