@@ -1,5 +1,4 @@
-import pickmeup from "../PickMeUp/pickmeup.js"
-import 'air-datepicker/air-datepicker.css'
+import pickmeup from "../PickMeUp/pickmeup.js";
 import $ from "jquery";
 
 let elements = document.querySelectorAll(".form__dropdown-menu-el");
@@ -10,7 +9,8 @@ let elements = document.querySelectorAll(".form__dropdown-menu-el");
 //код для дропдаунов с меню
 for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
   //меню дропдауна
-  let menu = dwm.parentNode.parentNode.querySelector('.form__dropdown-menu');
+  //.parentNode.parentNode
+  let menu = dwm.querySelector('.form__dropdown-menu');
   menu.classList.add('form__dropdown-menu_hidden');
   //инпут дропдауна
   let dropDown = dwm.querySelector('.form__dropdown');
@@ -40,13 +40,23 @@ for (let dwm of document.querySelectorAll(".form__dropdown-with-menu")) {
     return text_forms[2];
   }
 
+  function changeDTGuest() {
+    let gAmount = Number(countersArr[0].innerHTML) + Number(countersArr[1].innerHTML);
+    let mAmount = Number(countersArr[2].innerHTML);
+    dropDown.value = gAmount + " " + declOfNum(gAmount, ["гость", "гостя", "гостей"]);
+    dropDown.value += ", " + countersArr[2].innerHTML + " " + declOfNum(mAmount, ["младенец", "младенца", "младенцев"]);
+    //= result;//amount + " " + declOfNum(amount, ["гость", "гостя", "гостей"]);
+  }
   function changeDT() {
     //проверка являются ли все счетчики нулями
     if (!Array.from(countersArr).reduce((sum, el) => sum + Number(el.innerHTML), 0)) {
       dropDown.value = "";
       return;
     }
-    
+    if (dwm.classList.contains("form__dropdown-with-menu_guest")) {
+      changeDTGuest();
+      return;
+    }
     let result = "";
     for (let i = 0; i < labelsArr.length; i++) {
 

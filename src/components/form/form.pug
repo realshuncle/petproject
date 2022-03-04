@@ -18,8 +18,8 @@ mixin dropdown-menu([labels = [], bt1_name = "", bt2_name = ""])
         p.form__dropdown-menu-counter 0
         button(type="button" class="form__dropdown-menu-button form__dropdown-menu-button_plus") +
 
-mixin dropdown-with-menu(dropdown_set = [label, name, placeholder, mod = []], menu_set = [])
-  div.form__dropdown-with-menu
+mixin dropdown-with-menu(dropdown_set = [label, name, placeholder, mod = []], menu_set = [], mod = [])
+  div.form__dropdown-with-menu(class = mod)
     //label.form__label
     h3 #{dropdown_set[0]}  
     input(type="text", name=dropdown_set[1], placeholder=dropdown_set[2], class="form__dropdown" class = dropdown_set[3], readonly)
