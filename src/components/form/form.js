@@ -1,4 +1,6 @@
 import pickmeup from "../PickMeUp/pickmeup.js";
+import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 import $ from "jquery";
 
 let elements = document.querySelectorAll(".form__dropdown-menu-el");
@@ -573,3 +575,29 @@ for (let checkboxListBtn of document.querySelectorAll(".form__checkbox-list-btn"
   //checkboxList.querySelector(".form__label")
 }
 
+
+
+for (let slider of document.getElementsByClassName("form__slider")) {
+  noUiSlider.create(slider, {
+    start: [20, 80],
+    connect: true,
+    behaviour: 'unconstrained-tap',
+    range: {
+        'min': 0,
+        'max': 100
+    },
+    step: 1,
+  });
+  slider.noUiSlider.on('update', function () {
+    //let x = slider.noUiSlider.get(true);
+    //console.log(x);
+    console.log(slider.noUiSlider.get(true).sort((a, b) => a - b));
+  });
+  /*slider.addEventListener('update', function() {
+   
+  });*/
+}
+/*console.log(slider);
+
+
+console.log(slider);*/
