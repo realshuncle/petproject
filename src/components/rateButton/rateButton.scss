@@ -1,0 +1,28 @@
+
+.rateButtons {
+  width: 12em;
+  display: flex;
+  //letter-spacing : -.36em;
+  position: relative;
+  font-size: 10px;
+  .rateButton {
+    display: none;
+  }
+  .star {
+    content: "";
+    height: 2.4em;
+    width: 2.4em;
+    background-image: url('./img/star_border.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+  .rateButton:nth-child(1):checked ~ .star:nth-of-type(-n + 1),
+  .rateButton:nth-child(2):checked ~ .star:nth-of-type(-n + 2),
+  .rateButton:nth-child(3):checked ~ .star:nth-of-type(-n + 3),
+  .rateButton:nth-child(4):checked ~ .star:nth-of-type(-n + 4),
+  .rateButton:nth-child(5):checked ~ .star:nth-of-type(-n + 5) 
+  {
+    background-image: url('./img/star.svg');
+  }
+}
