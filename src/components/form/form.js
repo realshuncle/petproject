@@ -578,20 +578,26 @@ for (let checkboxListBtn of document.querySelectorAll(".form__checkbox-list-btn"
 
 
 for (let slider of document.getElementsByClassName("form__slider")) {
-  noUiSlider.create(slider, {
-    start: [20, 80],
+  let slDiv = slider.querySelector(".form__sliderDiv");
+  console.log(slDiv);
+  noUiSlider.create(slDiv, {
+    start: [5000, 10000],
     connect: true,
     behaviour: 'unconstrained-tap',
+    step: 1,
     range: {
         'min': 0,
-        'max': 100
+        'max': 15000
     },
-    step: 1,
+
   });
-  slider.noUiSlider.on('update', function () {
+  let range = slider.querySelector(".form__sliderRange");
+  //range.innerHTML = slDiv.noUiSlider.get(true).sort((a, b) => Math.round(a - b)).map(Math.round).join(" - ");
+  slDiv.noUiSlider.on('update', function () {
     //let x = slider.noUiSlider.get(true);
     //console.log(x);
-    console.log(slider.noUiSlider.get(true).sort((a, b) => a - b));
+    let rangeArr =  slDiv.noUiSlider.get().sort((a, b) => Math.round(a - b));
+    range.innerHTML = rangeArr.map(Math.round).map((x) => x + '₽').join(" - ");
   });
   /*slider.addEventListener('update', function() {
    

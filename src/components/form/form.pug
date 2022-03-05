@@ -98,9 +98,13 @@ mixin toggleButtons([label, btlabels = []])
     .form__label #{label}
     .form__toggleButtons
       each eb in btlabels
-        label.form__toggleButton
+        label.form__toggleButtons
           input.form__checkbox(type = "checkbox")
           .form__tblabel #{eb}
 
-mixin slider()
+mixin slider(label = "")
   .form__slider
+    .form__sliderBar
+      .form__label #{label}
+      .form__sliderRange
+    .form__sliderDiv

@@ -410,6 +410,15 @@
   &__slider {
     //padding-left: 50px;
     width: 320px;
+  }
+  &__sliderBar {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__sliderRange {
+    color: $text_color50;
+  }
+  &__sliderDiv {
     .noUi-handle {
       background: linear-gradient(180deg, $secondary_color 0%, $secondary_color_2 100%);
       width: 14px;
@@ -431,7 +440,7 @@
       
     }
     /*.noUi-handle-upper {
-
+      right: 0px;
     }
     .noUi-handle-lower {
       
@@ -440,7 +449,7 @@
       display: none;
     }
     .noUi-base {
-      width: 100px;
+      //width: 100px;
       height: 6px;
       //width: 12px;
       border: 1px solid #1F204140;
