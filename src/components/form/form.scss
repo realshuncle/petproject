@@ -2,7 +2,8 @@
 
 
 .form {
-  .button {
+  &__button {
+    //width: 100px;
     background: none;
     color: $primary_color;
     border: none;
@@ -14,7 +15,55 @@
     letter-spacing: 0em;
     text-align: left;
     text-transform: uppercase;
+    &:active {
+      color: $text_color50;
+    }
+    &_mod {
+      text-align: center;
+      width: 100px;
+      height: 44px;
+      border: solid 2px transparent;
+      border-radius: 22px;
+      background-origin: border-box;
+    }
+    &_theme_border {
+      background-image: linear-gradient(white, white), linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      &:active {
+        color: $primary_color;
+        background-image: linear-gradient(white, white), linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+      }
+    }
+    &_theme_fill {
+      position: relative;
+      color: white;
+      background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+      background-clip: border-box;
+      background-origin: border-box;
+      &:active {
+        color: white;
+        background-image: linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+      }
+    }
+    &_theme_farr {
+      width: 320px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        right: 0;
+        height: 44px;
+        width: 44px;
+        background-image: url("./img/arrow_forward_white.svg");
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+
+    }
   }
+
   .button-clear_hide {
     opacity: 0; 
   }
@@ -478,5 +527,23 @@
       //border-radius: 3px;
       //vertical-align: middle;
     //}
+  }
+  &__richCheckboxLabel {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0em;
+    color: $text_color75;
+  }
+  &__richCheckboxText {
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    color: $text_color50;
   }
 }

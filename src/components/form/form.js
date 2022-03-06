@@ -1,7 +1,7 @@
 import pickmeup from "../PickMeUp/pickmeup.js";
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
-import $ from "jquery";
+//import $ from "jquery";
 
 let elements = document.querySelectorAll(".form__dropdown-menu-el");
 
@@ -458,7 +458,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
   btnClear.textContent = "очистить";
   btnClear.setAttribute("type", "button");
   btnClear.setAttribute("disabled", "disabled");
-  btnClear.classList.add("button");
+  btnClear.classList.add("form__button");
   btnClear.classList.add("button-clear_hide");
 
   btnClear.addEventListener("click", function() {
@@ -479,7 +479,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
   btnApply.textContent = "применить";
   btnApply.setAttribute("type", "button");
   btnApply.classList.add("button-apply");
-  btnApply.classList.add("button");
+  btnApply.classList.add("form__button");
 
   butbar.appendChild(btnClear);
   butbar.appendChild(btnApply);

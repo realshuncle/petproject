@@ -27,8 +27,8 @@ mixin dropdown-with-menu(dropdown_set = [label, name, placeholder, mod = []], me
     .form__dropdown-menu
       +dropdown-menu(menu_set)
       .pmu-buttons-bar
-        button(type="button" disabled="disabled" class="button button-clear button-clear_hide") очистить
-        button(type="button" class="button-apply button") применить
+        button(type="button" disabled="disabled" class="form__button button-clear button-clear_hide") очистить
+        button(type="button" class="button-apply form__button") применить
 
 
 mixin input-date([label, name, placeholder='ДД.ММ.ГГГГ', mod = []])
@@ -82,7 +82,19 @@ mixin checkboxList([label, cbNames=[]])
         li
           label.form__checkbox-list-el
             input.form__checkbox(type="checkbox")
-            .form__checkbox-list-label #{n}            
+            .form__checkbox-list-label #{n}
+
+mixin richCheckboxList(label = "Rich checkbox list", rcbNames = [["rcbLabel1", "rcbText1"], ["rcbLabel2", "rcbText2"]])
+  .form__checkbox-list
+    .form__label(type="button") #{label}
+    ul.form__checkbox-list
+      each n in rcbNames
+        li
+          label.form__checkbox-list-el
+            input.form__checkbox(type="checkbox")
+            .form__checkbox-list-label.form__richCheckbox
+              .form__richCheckboxLabel #{n[0]}
+              .form__richCheckboxText #{n[1]}              
         
 mixin radioButtons([label, btlabels = []])
   .form__radioButtonsDiv
@@ -98,7 +110,7 @@ mixin toggleButtons([label, btlabels = []])
     .form__label #{label}
     .form__toggleButtons
       each eb in btlabels
-        label.form__toggleButtons
+        label.form__toggleButton
           input.form__checkbox(type = "checkbox")
           .form__tblabel #{eb}
 
