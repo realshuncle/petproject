@@ -1,4 +1,4 @@
-mixin likeButton()
+mixin likeButton(num = '0')
   label.likeButton
     input.lbCheckbox(type = "checkbox")
-    .lblabel 12
+    .lblabel #{num}
