@@ -50,6 +50,8 @@
   "dependencies": {
     "air-datepicker": "^3.1.1",
     "jquery": "^3.6.0",
-    "nouislider": "^15.5.1"
+    "nouislider": "^15.5.1",
+    "paginationjs": "^2.1.5",
+    "swiper": "^8.0.7"
   }
 }
