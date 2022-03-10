@@ -1,5 +1,26 @@
 @import '../../theme/colors.scss';
 
+$white: white;
+
+@function expand_more($opacity) {
+  @return "data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z' fill='#{encodecolor($text_color)}' fill-opacity='#{$opacity}'/%3E%3C/svg%3E"
+};
+
+@function expand_up($opacity) {
+  @return "data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.40625 7.42187L1.74709e-06 6.01562L6 0.0156231L12 6.01562L10.5938 7.42187L6 2.82812L1.40625 7.42187Z' fill='#{encodecolor($text_color)}' fill-opacity='#{$opacity}'/%3E%3C/svg%3E%0A";
+}
+
+$arrow_forward_white: "data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0.984375L17.0156 9L9 17.0156L7.59375 15.6094L13.1719 9.98438H0.984375V8.01562H13.1719L7.59375 2.39062L9 0.984375Z' fill='#{encodecolor($white)}'/%3E%3C/svg%3E";
+
+$arrow_forward_primary: "data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.36301 0.984375L16.3786 9L8.36301 17.0156L6.95676 15.6094L12.5349 9.98438H0.347383V8.01562H12.5349L6.95676 2.39062L8.36301 0.984375Z' fill='#{encodecolor($primary_color)}' /%3E%3C/svg%3E%0A";
+
+$checkbox_checked: "data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.46439 2.29245L5.70703 6.53509L4.29282 7.9493L0.0501771 3.70666L1.46439 2.29245Z' fill='url(%23paint0_linear_18381_239)'/%3E%3Cpath d='M8.53546 0.878232L9.94967 2.29245L4.29282 7.9493L2.8786 6.53509L8.53546 0.878232Z' fill='url(%23paint1_linear_18381_239)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_18381_239' x1='7.82835' y1='0.171125' x2='2.1715' y2='5.82798' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='#{encodecolor($primary_color)}'/%3E%3Cstop offset='1' stop-color='#{encodecolor($primary_color_2)}'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_18381_239' x1='7.82835' y1='0.171125' x2='2.1715' y2='5.82798' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='#{encodecolor($primary_color)}'/%3E%3Cstop offset='1' stop-color='#{encodecolor($primary_color_2)}'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A";
+
+$radioButton_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='12' height='12' rx='6' fill='url(%23paint0_linear_1_291)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_1_291' x1='6' y1='0' x2='6' y2='12' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='#{encodecolor($primary_color)}'/%3E%3Cstop offset='1' stop-color='#{encodecolor($primary_color_2)}'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A";
+
+$toogle: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect y='0.557617' width='12' height='12' rx='6' fill='#{encodecolor($text_color)}' fill-opacity='0.25'/%3E%3C/svg%3E";
+
+$toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect y='0.557617' width='12' height='12' rx='6' fill='url(%23paint0_linear_1_303)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_1_303' x1='6' y1='0.557617' x2='6' y2='12.5576' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='#{encodecolor($primary_color)}'/%3E%3Cstop offset='1' stop-color='#{encodecolor($primary_color_2)}'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A";
 
 .form {
   width: 380px;
@@ -85,7 +106,7 @@
         right: 0;
         height: 44px;
         width: 44px;
-        background-image: url("./img/arrow_forward_white.svg");
+        background-image: url($arrow_forward_white);
         background-position: center center;
         background-repeat: no-repeat;
       }
@@ -174,11 +195,11 @@
       width: 100%;//10.72em;
     }
     cursor: pointer;
-    background-image: url(./img/expand_more_50.svg);
+    background-image: url(expand_more(0.50));
     background-repeat: no-repeat;
     background-position: top 17px right 15px;
     &:focus{
-      background-image: url(./img/expand_more_75.svg);
+      background-image: url(expand_more(0.75));
     }
   }
   &__date-dropdowns {
@@ -296,7 +317,7 @@
     width: 44px;
     height: 44px;
     border: none;
-    background: url('./img/arrow_forward.svg');
+    background: url($arrow_forward_primary);
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
@@ -319,7 +340,7 @@
       border: 0;
       width: 100%;
       background: none;
-      background-image: url('./img/expand_more_50.svg');
+      background-image: url(expand_more(0.5));
       background-repeat: no-repeat;
       background-position: calc(100% - 12px) center;
       //background-position-x: 3px right;
@@ -328,7 +349,7 @@
         background: transparent;
       }*/
       &_up {
-        background-image: url('./img/expand_up_75.svg');
+        background-image: url(expand_up(0.5));
       }
 
     }
@@ -342,7 +363,7 @@
   }
   &__checkbox:checked + &__checkbox-list-label::before {
     //background-color: blue;
-    background-image: url('./img/checkbox_checked.svg');
+    background-image: url($checkbox_checked);
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
@@ -404,7 +425,7 @@
       //width: 19px;
       //height: 19px;
       //outline: solid 1px $primary_color#888;
-      background-image: url('./img/radioButtonChecked.svg');
+      background-image: url($radioButton_checked);
       background-repeat: no-repeat;
       background-position-x: center;
       background-position-y: center;
@@ -473,14 +494,14 @@
     content: '';
     border: 1px solid $text_color25;
     border-radius: 10px;
-    background-image: url('./img/toggle.svg');
+    background-image: url($toogle);
     background-size: 0.8571428571428571em 0.9230769230769231em;
     background-repeat: no-repeat;
     background-position: center left 4px;
   }
   &__checkbox:checked + &__tblabel::before {
     transition: .4s;
-    background-image: url('./img/toggleChecked.svg');
+    background-image: url($toogle_checked);
     background-repeat: no-repeat;
     background-position: center right 4px;
     border-color: $primary_color;
