@@ -1,39 +1,36 @@
 include ../rating/rating.pug
 
-
 .catalog
-  
 
-
-
-mixin catalog__element(imageSrc = ["./img/image.png", '', '', ''], number = "000", price = "1 000", rating = 3, rev = 1113, isLux = true)
+mixin catalog__element(imageSrc = ["./img/image.png", './img/image2.png', './img/image3.png'], number = "000", price = "1 000", rating = 3, rev = 145, isLux = true)
   .catalog__element
     .catalog__swiper.swiper
       .swiper-wrapper
-        .swiper-slide
-          img(src=require(`${imageSrc[0]}`), alt="")
-        .swiper-slide
-          img(src=require("./img/image.png"), alt="")
-        .swiper-slide
-          img(src=require("./img/image2.png"), alt="")
-        .swiper-slide
-          img(src=require("./img/image3.png"), alt="")
+        each img in imageSrc
+          .swiper-slide
+            img(src=require(`${img}`), alt="")
       .swiper-pagination
-      .swiper-button-prev
-      .swiper-button-next
+      .swiper-button.swiper-button-prev
+      .swiper-button.swiper-button-next
     .catalog__elementWrapper
       .catalog__elementGlue
-        .catalog__elementText.catalog__elementText_theme_bold №
-          span.catalog__elementText_size_large &nbsp;#{number}
-          if (isLux)
-            span.catalog__elementText_theme_colored.catalog__elementText_size_small &nbsp; Люкс
-          //.catalog__elementText_theme_bold 888
         .catalog__elementText
-          span.catalog__elementText_theme_bold #{price}₽
-          span.catalog__elementText_size_small &nbsp;в сутки
+          span.width_bold.color_black №
+          span.width_bold.size_large.color_black &nbsp;#{number}
+          if (isLux)
+            span.width_bold.color_primary.size_small &nbsp; Люкс
+        .catalog__elementText
+          span.width_bold #{price}₽
+          span.size_small &nbsp;в сутки
       .catalog__elementGlue
         +rating(rating)
         .catalog__elementText
-          span.catalog__elementText_theme_bold  #{rev}
-          | &nbsp;Отзывов
-      
+          span.width_bold  #{rev}
+          if (rev % 100 > 10 && rev % 100 < 20)
+            | &nbsp; Отзывов
+          else if (rev % 10 > 1 && rev % 10 < 5)
+            | &nbsp; Отзыва
+          else if (rev % 10 == 1)
+            | &nbsp; Отзыв
+          else
+            | &nbsp; Отзывов

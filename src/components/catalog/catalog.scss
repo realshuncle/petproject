@@ -8,10 +8,10 @@ $prevButton: "data:image/svg+xml,%3Csvg width='8' height='13' viewBox='0 0 8 13'
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  max-width: 834px;
+  max-width: 83.4em;
   font-size: 10px;
   .swiper {
-    border-radius: 4px 4px 0 0;
+    border-radius: 0.4em 0.4em 0 0;
     width: 100%;
     height: 100%;
     &:hover .swiper-slide {
@@ -20,7 +20,7 @@ $prevButton: "data:image/svg+xml,%3Csvg width='8' height='13' viewBox='0 0 8 13'
       }      
     }
     &-slide {
-      min-height: 150px;
+      min-height: 15em;
       position: relative;
       &::before {
         content: '';
@@ -55,109 +55,108 @@ $prevButton: "data:image/svg+xml,%3Csvg width='8' height='13' viewBox='0 0 8 13'
       transition: .5s;
       transition-property: opacity;
     }
-          
-    &-button-next {
+    &-button {
       transition: .5s;
       transition-property: opacity;
       opacity: 0;
-      width: 44px;
-      height: 44px;
-      right: 0;
-      background-image: url($nextButton);
+      width: 4.4em;
+      height: 4.4em;
       background-repeat: no-repeat;
       background-position: center, center;
+      &-next {
+        right: 0;
+        background-image: url($nextButton);
+      }
+      &-prev {
+        left: 0;
+        background-image: url($prevButton);
+      }
       &::after {
         display: none;
       }
-    }
-    &-button-prev {
-      transition: .5s;
-      transition-property: opacity;
-      opacity: 0;
-      width: 44px;
-      height: 44px;
-      left: 0;
-      background-image: url($prevButton);
-      background-repeat: no-repeat;
-      background-position: center, center;
-      &::after {
-        display: none;
-      }
-    }
+    }   
+    
     &-pagination {
       position: absolute;
       z-index: 10;
       text-align: right;
-      bottom: 15px;
-      right: 13px;
+      bottom: 1.5em;
+      right: 1.3em;
       width: auto;
       &-bullet {
-        margin: 0 2px;
+        margin: 0 0.2em;
         cursor: pointer;
         display: inline-block;
         border-radius: 50%;
-        height: 8px;
-        width: 8px;
+        height: 0.8em;
+        width: 0.8em;
         box-sizing: border-box;
         background: none;
-        opacity: 1;
-        border: 1px solid #FFFFFF;
+        border: 0.1em solid #FFFFFF;
         &-active {
           transition: .5s;
           transition-property: background-color, box-shadow;
           background-color: white;
-          box-shadow: 0px 5px 5px 0px #1F20414D;
+          box-shadow: 0em 0.5em 0.5em 0em #1F20414D;
         }
       }
     }
-    max-height: 150px;
+    max-height: 15em;
   }
   &__element {
-    width: 270px;
-    border-radius: 4px;
+    width: 27em;
+    border-radius: 0.4em;
   }
   &__elementGlue {
     &:first-child {
-      border-bottom: 1px solid $text_color05;
+      border-bottom: 0.1em solid $text_color05;
     }
+    /*&:last-child {
+      align-items: stretch;
+    }*/
     display: flex;
     justify-content: space-between;
-    height: 24px;
+    height: 2.4em;
     align-items: center;
-    padding-top: 8px;
-    padding-bottom: 10px;
+    padding-top: 0.8em;
+    padding-bottom: 1em;
   }
   &__elementWrapper {
-    padding: 20px;
+    padding: 2em;
   }
   &__elementText {
-    :last-child {
-      align-items: center;
-    }
-    font-size: 14px;
-    line-height: 14px;
+    //display: flex;
+    font-size: 1.4em;
+    line-height: 1.0em;
     color: $text_color50;
-    text-align: left;
-    &:first-child {
-      color: $text_color;
-    }
-    &_theme {
+    /*span {
+      display: flex;
+      align-items: ;
+      height: 24px;
+      vertical-align: bottom;
+    }*/
+    .width {
       &_bold {
         font-weight: 700;
       }
-      &_colored {
+    }
+    .color {
+      &_primary {
         color: $primary_color;
         text-transform: uppercase;
       }
+      &_black {
+        color: $text_color;
+      }
     }
-    &_size {
+    .size {
       &_large {
-        font-size: 19px;
-        line-height: 12px;
+        font-size: 1.3571em;
+        line-height: 0.8571em;
       }
       &_small {
-        font-size: 12px;
-        line-height: 16px;
+        font-size: 0.8571em;
+        line-height: 1.1429em;
       }
     }
   }
