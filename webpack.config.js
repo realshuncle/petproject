@@ -63,8 +63,8 @@ module.exports = {
       // /каталог со страницами/имя дирректории/имя диррекктории.pug
     ),
     new webpack.ProvidePlugin({
-      $: 'jquerry',
-      jQuerry: 'jquerry',
+      $: 'jquery',
+      jQuerry: 'jquery',
       //'window.jQuerry': 'jquerry',
     })
     /*new HtmlWebpackPlugin({
@@ -196,9 +196,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          // options: {
-          //     presets: ['@babel/preset-env']
-          // }
+          options: {
+              presets: ['@babel/preset-env']
+          }
         },
       },
     ],
