@@ -1,0 +1,15 @@
+include ../../components/likeButton/likeButton.pug
+
+mixin review(name = 'Имя Фамилие', lastEntr = '0 дней назад', text = "text", likes = "0", imgSrc = "src")
+  .review
+    .review__glue
+      .review__el
+        img(src = imgSrc)
+      .review__el
+        .review__label #{name}
+        .review__text #{lastEntr}
+    .review__glue
+      .review__el
+        +likeButton(likes)
+      .review__el
+        .review__text #{text}
