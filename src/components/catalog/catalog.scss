@@ -1,0 +1,164 @@
+@import '../../theme/colors.scss';
+
+$nextButton: "data:image/svg+xml,%3Csvg width='8' height='13' viewBox='0 0 8 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.578125 1.90527L1.98438 0.499024L7.98438 6.49902L1.98438 12.499L0.578125 11.0928L5.17188 6.49902L0.578125 1.90527Z' fill='white'/%3E%3C/svg%3E%0A";
+
+$prevButton: "data:image/svg+xml,%3Csvg width='8' height='13' viewBox='0 0 8 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.42188 11.0928L6.01563 12.499L0.0156253 6.49902L6.01563 0.499024L7.42188 1.90527L2.82813 6.49902L7.42188 11.0928Z' fill='white'/%3E%3C/svg%3E%0A";
+
+.catalog {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 834px;
+  font-size: 10px;
+  .swiper {
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    height: 100%;
+    &:hover .swiper-slide {
+      &::before {
+        opacity: 1;
+      }      
+    }
+    &-slide {
+      min-height: 150px;
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 16%), 
+                    linear-gradient(270deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 16%);
+        opacity: 0;
+        transition: 0.5s; 
+        z-index: 1;
+      }
+    }
+    &-wrapper {
+      height: 100%;
+    }
+    img {
+      width: 100%;
+      overflow: hidden;
+      object-fit: cover;
+      object-position: center;
+    }
+    &:hover .swiper-button-next {
+      opacity: 1;
+      transition: .5s;
+      transition-property: opacity;
+    }
+    &:hover .swiper-button-prev {
+      opacity: 1;
+      transition: .5s;
+      transition-property: opacity;
+    }
+          
+    &-button-next {
+      transition: .5s;
+      transition-property: opacity;
+      opacity: 0;
+      width: 44px;
+      height: 44px;
+      right: 0;
+      background-image: url($nextButton);
+      background-repeat: no-repeat;
+      background-position: center, center;
+      &::after {
+        display: none;
+      }
+    }
+    &-button-prev {
+      transition: .5s;
+      transition-property: opacity;
+      opacity: 0;
+      width: 44px;
+      height: 44px;
+      left: 0;
+      background-image: url($prevButton);
+      background-repeat: no-repeat;
+      background-position: center, center;
+      &::after {
+        display: none;
+      }
+    }
+    &-pagination {
+      position: absolute;
+      z-index: 10;
+      text-align: right;
+      bottom: 15px;
+      right: 13px;
+      width: auto;
+      &-bullet {
+        margin: 0 2px;
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 50%;
+        height: 8px;
+        width: 8px;
+        box-sizing: border-box;
+        background: none;
+        opacity: 1;
+        border: 1px solid #FFFFFF;
+        &-active {
+          transition: .5s;
+          transition-property: background-color, box-shadow;
+          background-color: white;
+          box-shadow: 0px 5px 5px 0px #1F20414D;
+        }
+      }
+    }
+    max-height: 150px;
+  }
+  &__element {
+    width: 270px;
+    border-radius: 4px;
+  }
+  &__elementGlue {
+    &:first-child {
+      border-bottom: 1px solid $text_color05;
+    }
+    display: flex;
+    justify-content: space-between;
+    height: 24px;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  }
+  &__elementWrapper {
+    padding: 20px;
+  }
+  &__elementText {
+    :last-child {
+      align-items: center;
+    }
+    font-size: 14px;
+    line-height: 14px;
+    color: $text_color50;
+    text-align: left;
+    &:first-child {
+      color: $text_color;
+    }
+    &_theme {
+      &_bold {
+        font-weight: 700;
+      }
+      &_colored {
+        color: $primary_color;
+        text-transform: uppercase;
+      }
+    }
+    &_size {
+      &_large {
+        font-size: 19px;
+        line-height: 12px;
+      }
+      &_small {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}

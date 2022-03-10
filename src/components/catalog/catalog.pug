@@ -1,0 +1,39 @@
+include ../rating/rating.pug
+
+
+.catalog
+  
+
+
+
+mixin catalog__element(imageSrc = ["./img/image.png", '', '', ''], number = "000", price = "1 000", rating = 3, rev = 1113, isLux = true)
+  .catalog__element
+    .catalog__swiper.swiper
+      .swiper-wrapper
+        .swiper-slide
+          img(src=require(`${imageSrc[0]}`), alt="")
+        .swiper-slide
+          img(src=require("./img/image.png"), alt="")
+        .swiper-slide
+          img(src=require("./img/image2.png"), alt="")
+        .swiper-slide
+          img(src=require("./img/image3.png"), alt="")
+      .swiper-pagination
+      .swiper-button-prev
+      .swiper-button-next
+    .catalog__elementWrapper
+      .catalog__elementGlue
+        .catalog__elementText.catalog__elementText_theme_bold №
+          span.catalog__elementText_size_large &nbsp;#{number}
+          if (isLux)
+            span.catalog__elementText_theme_colored.catalog__elementText_size_small &nbsp; Люкс
+          //.catalog__elementText_theme_bold 888
+        .catalog__elementText
+          span.catalog__elementText_theme_bold #{price}₽
+          span.catalog__elementText_size_small &nbsp;в сутки
+      .catalog__elementGlue
+        +rating(rating)
+        .catalog__elementText
+          span.catalog__elementText_theme_bold  #{rev}
+          | &nbsp;Отзывов
+      
