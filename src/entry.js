@@ -1,3 +1,7 @@
+import $ from "jquery";
+global.jQuery = $;
+global.$ = $;
+
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }
