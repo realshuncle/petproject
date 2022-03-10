@@ -1,7 +1,13 @@
-mixin text-field([label, name, placeholder, mod = []])
+mixin formTitle(name = "Form name")
+  .form__title #{name}
+
+mixin text-field([label = 'label', name = 'name', placeholder = 'placeholder', mod = []])
   label.form__label
     h3 #{label}
     input(type="text", name=name, placeholder=placeholder, class="form__text-field" class = mod)
+
+mixin textField(name = 'name', placeholder = 'placeholder', type="text")
+  input(type=type, name=name, placeholder=placeholder, class="form__text-field")
 
 mixin dropdown([label, name, placeholder, mod = []])
   label.form__label
@@ -9,7 +15,6 @@ mixin dropdown([label, name, placeholder, mod = []])
     input(type="text", name=name, placeholder=placeholder, class="form__dropdown" class = mod, readonly)
 
 mixin dropdown-menu([labels = [], bt1_name = "", bt2_name = ""])
-  //div.form__dropdown-menu
   each label in labels
     div.form__dropdown-menu-el
       p.form__dropdown-menu-label #{label}
@@ -30,6 +35,10 @@ mixin dropdown-with-menu(dropdown_set = [label, name, placeholder, mod = []], me
         button(type="button" disabled="disabled" class="form__button button-clear button-clear_hide") очистить
         button(type="button" class="button-apply form__button") применить
 
+mixin textField_maskedDate(label = 'Masked input', name = 'date', placeholder='ДД.ММ.ГГГГ')
+  label.form__label
+    h3 #{label}
+    input(type="text", name=name, placeholder=placeholder, class="form__date-masked" class)
 
 mixin input-date([label, name, placeholder='ДД.ММ.ГГГГ', mod = []])
   //mod += ["from__date-masked"]
@@ -57,7 +66,13 @@ mixin date-dropdown([label, mod=[]])
         input(type="text", name=name, placeholder='ДД.ММ.ГГГГ', class="form__dropdown form__dropdown_date form__date-dropdown_range" class = mod, readonly)
     div.pmu-plug
 
-mixin subscrTextField([label, mod=[]])
+mixin subscrTextField()
+  //.form__text-field-div 
+  .form__text-field-glue
+    input(type="email", name=name, placeholder='Email', pattern="[^@\s]+@[^@\s]+\.[^@\s]+", required, class="form__text-field form__text-field_subscr" class = mod)
+    button(type="submit", class="form__subscrSubmit")
+
+//mixin subscrTextField([label, mod=[]])
   .form__text-field-div 
     label.form__label #{label}
     .form__text-field-glue
@@ -96,9 +111,9 @@ mixin richCheckboxList(label = "Rich checkbox list", rcbNames = [["rcbLabel1", "
               .form__richCheckboxLabel #{n[0]}
               .form__richCheckboxText #{n[1]}              
         
-mixin radioButtons([label, btlabels = []])
+mixin radioButtons(btlabels = ['first', 'second'])
   .form__radioButtonsDiv
-    .form__label #{label}
+    //.form__label #{label}
     .form__radioButtons
       each eb in btlabels
         label.form__radioButton
@@ -113,6 +128,13 @@ mixin toggleButtons([label, btlabels = []])
         label.form__toggleButton
           input.form__checkbox(type = "checkbox")
           .form__tblabel #{eb}
+
+mixin toggleButton(label = 'toggle label')
+  .form__toggleButtonsDiv
+    .form__toggleButtons
+      label.form__toggleButton
+        input.form__checkbox(type = "checkbox")
+        .form__tblabel #{label}
 
 mixin slider(label = "")
   .form__slider
