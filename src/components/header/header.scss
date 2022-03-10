@@ -1,0 +1,104 @@
+@import '../../theme/colors.scss';
+.headerPlug {
+  height: 70px;
+}
+header {
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  transition: all .3s ease;
+}
+.header {
+  max-width: 1160px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  background-image: url('./img/logo.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  &__hidden {
+    transform: translateY(-100%);
+
+  }
+  //left: 0;
+  
+  padding-top: 18px;
+  padding-bottom: 18px;
+  display: flex;
+  background-color: white;
+  gap: 20px;
+  ul {
+
+    display: flex;
+    gap: 20px;
+    a {
+      text-decoration: none;
+      color: $text_color75;
+      font-family: Montserrat;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 17px;
+      letter-spacing: 0em;
+    }
+    & li:first-child a {
+      font-weight: 700;
+    }
+  }
+  .button {
+    color: $primary_color;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0em;
+    //text-align: left;
+    text-transform: uppercase;
+    &:active {
+      color: $text_color50;
+    }
+    &_mod {
+      text-decoration: none;
+      text-align: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 7px;
+      box-sizing: border-box;
+      ne-height: 14,63px;
+      //vertical-align: middle;
+      height: 34px;
+      border: solid 2px transparent;
+      border-radius: 22px;
+      background-origin: border-box;
+    }
+    &_theme_border {
+      background-image: linear-gradient(white, white), linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      &:active {
+        color: $primary_color;
+        background-image: linear-gradient(white, white), linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+      }
+    }
+    &_theme_fill {
+      position: relative;
+      color: white;
+      background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+      background-clip: border-box;
+      background-origin: border-box;
+      &:active {
+        color: white;
+        background-image: linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+      }
+    }
+  }
+  nav {
+    display: flex;
+    align-items: center;
+  }
+}
