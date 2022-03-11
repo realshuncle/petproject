@@ -513,11 +513,17 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
     })
   }
   pmuPlug.addEventListener('pickmeup-fill', function (e) {
+
     let days = pmu.querySelector('.pmu-days');
     let currentDate = new Date(pmuPlug.__pickmeup.options.current);
     //console.log(pmuPlug.__pickmeup.options);
-    currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1);
+    //console.log('fill');
+    //console.log(`before ${currentDate}`);
+    currentDate.setDate(1);
+    //console.log(`midle ${currentDate}`);
+    currentDate.setDate(currentDate.getDate() - (currentDate.getDay() ? currentDate.getDay() : 7) + 1);
     let options = pmuPlug.__pickmeup.options;
+    //console.log(`end ${currentDate}`);
     for (let day of days.querySelectorAll('.pmu-button')) {
       if (day.classList.contains('pmu-today') && day.classList.contains('pmu-selected')) {
         day.classList.remove('pmu-today');
