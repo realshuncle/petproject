@@ -5,7 +5,7 @@
  * @license 0BSD
  */
 
-(function (root, factory) {
+ (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD
 		//noinspection JSUnresolvedFunction
@@ -416,7 +416,7 @@
 					}
 					years_elements.push(year_element);
 				}
-				instance.appendChild(options.instance_content_template(years_elements, 'pmu-years'));
+				instance.appendChild(options.instance_content_template(years_elements, ['pmu-years']));
 			})();
 			(function () {
 				var months_elements = [],
@@ -458,7 +458,7 @@
 					}
 					months_elements.push(month_element);
 				}
-				instance.appendChild(options.instance_content_template(months_elements, 'pmu-months'));
+				instance.appendChild(options.instance_content_template(months_elements, ['pmu-months']));
 			})();
 			(function () {
 				var days_elements = [],
@@ -477,6 +477,7 @@
 					date_add_days(local_date, -(day + (day < 0 ? 7 : 0)));
 				})();
 				for (day = 0; day < 42; ++day) {
+					
 					day_element                  = document.createElement('div');
 					day_element.textContent      = local_date.getDate();
 					day_element.__pickmeup_day   = local_date.getDate();
@@ -513,18 +514,37 @@
 						dom_add_class(day_element, 'pmu-selected');
 					}
 					if (val === today) {
-						dom_add_class(day_element, 'pmu-today');
+						if (day_element.classList.contains('pmu-selected')) {
+							dom_add_class(day_element, 'pmu-today_inrange');
+						}
+						else {
+							dom_add_class(day_element, 'pmu-today');
+						}
+						
 					}
 					if (from_user.class_name) {
 						from_user.class_name.split(' ').forEach(
 							dom_add_class.bind(day_element, day_element)
 						);
 					}
+					if (JSON.stringify(options.date[0]) == JSON.stringify(local_date)) {
+						if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
+							dom_add_class(day_element, 'pmu-selected_begin');
+						else
+							dom_add_class(day_element, 'pmu-selected_none');
+					}
+					else if (JSON.stringify(options.date[1]) == JSON.stringify(local_date)) {
+						if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
+							dom_add_class(day_element, 'pmu-selected_end');
+						else
+							dom_add_class(day_element, 'pmu-selected_none');
+					}
+						
 					days_elements.push(day_element);
 					// Move to the next day
 					date_add_days(local_date, 1);
 				}
-				instance.appendChild(options.instance_content_template(days_elements, 'pmu-days'));
+				instance.appendChild(options.instance_content_template(days_elements, ['pmu-days']));
 			})();
 		}
 		shown_date_from.setDate(1);
@@ -937,6 +957,7 @@
 				);
 				options.lastSel = false;
 			}
+			
 			if (!dom_dispatch_event(target, 'show')) {
 				return;
 			}
@@ -976,8 +997,6 @@
 					left += 'px';
 					top += 'px';
 				}
-				root_element.style.left = left;
-				root_element.style.top  = top;
 				setTimeout(function () {
 					dom_on(target, document.documentElement, 'click', options.bound.hide);
 					dom_on(target, window, 'resize', options.bound.forced_show);
@@ -991,18 +1010,19 @@
 	 * @param {Event}   event
 	 */
 	function hide (target, event) {
-		var root_element = target.__pickmeup.element,
-			options      = target.__pickmeup.options;
+		var root_element = target.querySelector(".pmu-div"),//.__pickmeup.element,
+			options      = target.__pickmeup.options;//target.__pickmeup.options;
 		//noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures
 		if (
 			!event || !event.target ||										//Called directly
+			event.target.classList.contains('button-apply') ||
 			(
 				event.target !== target &&									//Clicked not on element itself
 				!(root_element.compareDocumentPosition(event.target) & 16)	//And not on its children
 			)
 		) {
 			if (dom_dispatch_event(target, 'hide')) {
-				dom_add_class(root_element, 'pmu-hidden');
+				dom_add_class(target.__pickmeup.element, 'pmu-hidden');
 				dom_off(target, document.documentElement, 'click', options.bound.hide);
 				dom_off(target, window, 'resize', options.bound.forced_show);
 				options.lastSel = false;
@@ -1374,7 +1394,9 @@
 		 */
 		instance_content_template : function (elements, container_class_name) {
 			var root_element = document.createElement('div');
-			dom_add_class(root_element, container_class_name);
+			for (let cl of container_class_name)
+				dom_add_class(root_element, cl);
+			//dom_add_class(root_element, container_class_name);
 			for (var i = 0; i < elements.length; ++i) {
 				dom_add_class(elements[i], 'pmu-button');
 				root_element.appendChild(elements[i]);

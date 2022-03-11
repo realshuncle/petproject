@@ -40,6 +40,8 @@ $color-highlighted								: white;
 	width						: 318px;
 	height					: 359px;
 	padding-top			: 0.95em;
+	//top: 0;
+	//left: 0;
 	z-index: 1;
 	//font-weight: bold;
 	
@@ -58,7 +60,8 @@ $color-highlighted								: white;
 
 	.pmu-instance {
 		display    : inline-block;
-		height     : 13.8em;
+		//height     : 13.8em;
+		height: 294px;
 		padding    : .5em;
 		text-align : center;
 		//width      : 15em;
@@ -305,5 +308,26 @@ $color-highlighted								: white;
 	&:not(.pmu-view-months) .pmu-months,
 	&:not(.pmu-view-years) .pmu-years {
 		display : none;
+	}
+}
+
+.pickmeup {
+	.pmu-days {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		.pmu-button {
+			margin: 0;
+		}
+	}
+	.pmu-instance {
+		nav {
+			display: flex;
+			.pmu-button {
+				margin: 0;
+				//width: auto;
+			}
+		}
+
 	}
 }
