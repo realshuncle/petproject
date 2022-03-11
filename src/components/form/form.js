@@ -436,6 +436,8 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
   //дропдауны для которых создается календарь
   let dropdowns = dateDropdown.querySelectorAll(".form__dropdown_date");
   //создается класс календаря
+  let now = new Date();
+  now.setHours(0, 0, 0, 0);
   let pmu_class = pickmeup(pmuPlug, {
     locale : 'ru',
     format	: 'd.m.Y',
@@ -444,6 +446,33 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
     next : '',
     title_format	: 'B Y',
     position: function() {return {left: 0, top: 0}},
+    render: function(date) {
+      let today  = this.default_date;
+      today.setHours(0, 0, 0, 0);
+      if (date < now)
+        return {disabled: true}
+      if (JSON.stringify(date) == JSON.stringify(today) && date > this.date[0] && date < this.date[1]) {
+        return {class_name: 'pmu-today_inrange'};
+      }
+      
+      if (JSON.stringify(this.date[0]) == JSON.stringify(date)) {
+        if (JSON.stringify(this.date[0]) != JSON.stringify(this.date[1])) {
+          return {class_name: 'pmu-selected_begin'};
+        }
+        else {
+          return {class_name: 'pmu-selected_none'};
+        }
+      }
+      else if (JSON.stringify(this.date[1]) == JSON.stringify(date)) {
+        if (JSON.stringify(this.date[0]) != JSON.stringify(this.date[1])) {
+          return {class_name: 'pmu-selected_end'};
+        }
+        else {
+          return {class_name: 'pmu-selected_none'};
+        }
+      }
+      return {};
+    },
   });
   //декоратор функции hide, нужен для того, чтобы не скрывать каленадрь при нажатии на блок pmu-div
   function hide(func) {
@@ -512,48 +541,11 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
       pmu_div.classList.remove('pmu-div_hidden');
     })
   }
-  pmuPlug.addEventListener('pickmeup-fill', function (e) {
-
-    let days = pmu.querySelector('.pmu-days');
-    let currentDate = new Date(pmuPlug.__pickmeup.options.current);
-    //console.log(pmuPlug.__pickmeup.options);
-    //console.log('fill');
-    //console.log(`before ${currentDate}`);
-    currentDate.setDate(1);
-    //console.log(`midle ${currentDate}`);
-    currentDate.setDate(currentDate.getDate() - (currentDate.getDay() ? currentDate.getDay() : 7) + 1);
-    let options = pmuPlug.__pickmeup.options;
-    //console.log(`end ${currentDate}`);
-    for (let day of days.querySelectorAll('.pmu-button')) {
-      if (day.classList.contains('pmu-today') && day.classList.contains('pmu-selected')) {
-        day.classList.remove('pmu-today');
-        day.classList.add('pmu-today_inrange');
-      }
-      
-      if (JSON.stringify(options.date[0]) == JSON.stringify(currentDate)) {
-        if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
-          day.classList.add('pmu-selected_begin');
-        else
-        day.classList.add('pmu-selected_none');
-      }
-      else if (JSON.stringify(options.date[1]) == JSON.stringify(currentDate)) {
-        if (JSON.stringify(options.date[0]) != JSON.stringify(options.date[1]))
-          day.classList.add('pmu-selected_end');
-        else
-          day.classList.add('pmu-selected_none');
-      }
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
+  pmuPlug.addEventListener('pickmeup-change', function (e) { 
+    console.log(e);
   });
   pmuPlug.addEventListener('pickmeup-change', function (e) {
     if (dropdowns.length == 1) {
-      
-      /*if (day_element.classList.contains('pmu-selected')) {
-        dom_add_class(day_element, 'pmu-today_inrange');
-      }
-      else {
-        dom_add_class(day_element, 'pmu-today');
-      }*/
       let resstr;
       if (e.detail.formatted_date[0] == e.detail.formatted_date[1])
         resstr = dropdowns[0].value = e.detail.date[0].toLocaleString("ru", {
@@ -569,7 +561,6 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
           day: 'numeric'
         });
       dropdowns[0].value = resstr.replace(/\./g, '');
-      //console.log(resstr.replace(/\./g, ''));
     }
     else {
       dropdowns[0].value = e.detail.formatted_date[0];
