@@ -1,36 +1,17 @@
-import pickmeup from "../PickMeUp/pickmeup.js";
-//import dom_dispatch_event from "../PickMeUp/pickmeup.js";
-//import dom_off from "../PickMeUp/pickmeup.js";
-//import dom_add_class from "../PickMeUp/pickmeup.js";
-
+//import pickmeup from "../PickMeUp/pickmeup.js";
 import noUiSlider from 'nouislider';
+import pickmeup from 'pickmeup';
 import 'nouislider/dist/nouislider.css';
-//import $ from "jquery";
-
-//console.log(pickmeup);
-
-/*function hide (target, event) {
-  //console.log(target);
-  //console.log(event);
-  var root_element = target.querySelector(".pmu-div"),//.__pickmeup.element,
-    options      = target.__pickmeup.options;//target.__pickmeup.options;
-  //noinspection JSBitwiseOperatorUsage,JSCheckFunctionSignatures
-  if (
-    !event || !event.target ||										//Called directly
-    event.target.classList.contains('button-apply') ||
-    (
-      event.target !== target &&									//Clicked not on element itself
-      !(root_element.compareDocumentPosition(event.target) & 16)	//And not on its children
-    )
-  ) {
-    if (dom_dispatch_event(target, 'hide')) {
-      dom_add_class(target.__pickmeup.element, 'pmu-hidden');
-      dom_off(target, document.documentElement, 'click', options.bound.hide);
-      dom_off(target, window, 'resize', options.bound.forced_show);
-      options.lastSel = false;
-    }
-  }
-}*/
+//import './form.scss';
+//import 'pickmeup/css/pickmeup.scss';
+//настройки календаря (локализация)
+pickmeup.defaults.locales['ru'] = {
+  days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+  daysShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+  daysMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+  months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+  monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
+};
 
 let elements = document.querySelectorAll(".form__dropdown-menu-el");
 
@@ -450,17 +431,6 @@ for (let input of inputs) {
 }*/
 //создание календаря для date-dropdown .form__date-dropdown-glue
 for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
-  //настройки календаря (локализация)
-  pickmeup.defaults.locales['ru'] = {
-    days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-    daysShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-    daysMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-    monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек']
-  };
- 
-  //pickmeup.hide = hide;
-  //console.log('init');
   //блок на который формируется календарь
   let pmuPlug = dateDropdown.querySelector('.pmu-plug');
   //дропдауны для которых создается календарь
@@ -475,27 +445,20 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
     title_format	: 'B Y',
     position: function() {return {left: 0, top: 0}},
   });
-  function test(x) {
+  //декоратор функции hide, нужен для того, чтобы не скрывать каленадрь при нажатии на блок pmu-div
+  function hide(func) {
     return function(event, target) {
-      console.log('ABOBA');
-      console.log(event);
-      console.log(target);
       for (let el of event.path) {
-        console.log(el);
         if (el?.classList?.contains('button-apply'))
           break;
         if (el?.classList?.contains('pmu-div'))
           return;
       }
-      //if (!event.path.includes())
-      x.apply(event, target);
+      func.apply(event, target);
     };
   }
-  //console.log(pmu_class);
-  console.log(pmuPlug.__pickmeup.options.bound.hide);
-  pmuPlug.__pickmeup.options.bound.hide = test(pmuPlug.__pickmeup.options.bound.hide);
-  //pmuPlug.__pickmeup.options.bound.hide = alert('lol');
-  //= hide.bind(pmuPlug, pmuPlug);
+  //замена функции hide
+  pmuPlug.__pickmeup.options.bound.hide = hide(pmuPlug.__pickmeup.options.bound.hide);
   //выбор необходимого календаря
   let pmu = document.querySelectorAll(".pickmeup");
   pmu = pmu[pmu.length - 1];
@@ -520,7 +483,6 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
     pmu_class.clear();
     pmu_class.set_date();
     //очитска полей
-    
     dropdowns[0].value = "";
     if (dropdowns.length != 1)
       dropdowns[1].value = "";
@@ -538,12 +500,10 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
   butbar.appendChild(btnClear);
   butbar.appendChild(btnApply);
 
-  //pmu.appendChild(butbar);
   pmu_div.appendChild(pmu);
   pmu_div.append(butbar);
   
   pmuPlug.appendChild(pmu_div);
-  //dateDropdown.appendChild(pmu_div);
 
   //перенос даты в input
   for (let dd of dropdowns) {
@@ -553,20 +513,11 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
     })
   }
   pmuPlug.addEventListener('pickmeup-fill', function (e) {
-    //.log('fill');
     let days = pmu.querySelector('.pmu-days');
     let currentDate = new Date(pmuPlug.__pickmeup.options.current);
-    //console.log(currentDate.getMonth());
-    //console.log(currentDate.getDate());
-    //while (currentDate.getDay() != 1) {
-    currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1);
-    //currentDate.setDate(currentDate.getDate() - currentDate.getDate());
-    //}
-    //console.log(currentDate);
     //console.log(pmuPlug.__pickmeup.options);
+    currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1);
     let options = pmuPlug.__pickmeup.options;
-    //console.log(currentDate);
-    //console.log(pmuPlug.__pickmeup.options.current);
     for (let day of days.querySelectorAll('.pmu-button')) {
       if (day.classList.contains('pmu-today') && day.classList.contains('pmu-selected')) {
         day.classList.remove('pmu-today');
@@ -586,13 +537,7 @@ for (let dateDropdown of document.querySelectorAll(".form__date-dropdowns")) {
           day.classList.add('pmu-selected_none');
       }
       currentDate.setDate(currentDate.getDate() + 1);
-      //console.log(pmu_class.get_date());
     }
-    //let today = pmu.querySelector('.pmu-today');
-    //console.log(today);
-    
-    //console.log(today);
-    
   });
   pmuPlug.addEventListener('pickmeup-change', function (e) {
     if (dropdowns.length == 1) {
