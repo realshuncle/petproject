@@ -3,17 +3,17 @@
 $background                       : white;
 $color                            : $text_color50;
 $color-hover                      : $primary_color;
+$disabled                         : $color;
 $not-in-month                     : $text_color25;
-$selected-background              : linear-gradient(180deg, transparentize($primary_color, 0.75) 0%,
-                                    transparentize($primary_color_2, 0.75) 100%);
+$selected-background              : linear-gradient(180deg, transparentize($primary_color, 0.80) 0%,
+                                    transparentize($primary_color_2, 0.80) 100%);
 $not-in-month-selected-background : linear-gradient(180deg, transparentize($primary_color, 0.85) 0%,
                                     transparentize($primary_color_2, 0.85) 100%);
 $day-of-week                      : $primary_color;
 $today-background                 : linear-gradient(180deg, $secondary_color 0%, $secondary_color_2 100%);
 $today-color                      : white;
-
-$border-radius_day								: 2em;//22px;
-$today-background-25							: linear-gradient(180deg, transparentize(#6FCF97, 0.25) 0%, transparentize(#66D2EA, 0.25) 100%);			//$secondary_color;//$not-in-month-selected-background !default;
+$border-radius_day								: 2em;
+$today-background-25							: linear-gradient(180deg, transparentize(#6FCF97, 0.25) 0%, transparentize(#66D2EA, 0.25) 100%);			//
 $background-before								: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
 $color-highlighted								: white;
 
@@ -137,18 +137,19 @@ $toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 
   }
   .pmu-plug {
     font-size: 14px;
+    //width: 320px;
+    position: relative;
     .pickmeup {
       position        : relative;
       width						: 20em;
       height					: 24.2857em;
-      //padding-top			: 0.95em;
       z-index: 1;
+
       .pmu-instance {
         padding: 0;
         height: 21em;
         width: 100%;
       }
-      
       .pmu-button {
         margin: auto auto;	
       }
@@ -161,6 +162,7 @@ $toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 
       }
       .pmu-prev,
       .pmu-next {
+        margin: 0 0;
         width : 1.7143em;
         height : 1.7143em;
         background-size: 1.4286em 1.4286em;
@@ -170,19 +172,17 @@ $toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 
       }
       .pmu-prev {
         background-image: url(arrow_back($primary_color));
-        //margin-right: 0.95em;
       }
       .pmu-next {
         background-image: url(arrow_forward($primary_color));
-        //margin-left: 0.95em;
       }
       .pmu-month {
-        width : 14em;
-        font-family: Montserrat;
-        font-style: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-weight: bold;
-        font-size: 1.3571em;
-        line-height: 23px;
+        font-size: 1.3571em;    
+        height : 1.2632em;
         color: $text_color;
       }
       .pmu-years,
@@ -198,15 +198,121 @@ $toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 
           font-size: 0.8571em;
         }
       }
+      
+      .pmu-day-of-week,
+      .pmu-days {
+  
+        * {
+          display     : inline-block;
+          line-height : 3.3333em;
+          width       : 3.3333em;
+          position: relative;
+        }
+        .pmu-button {
+          position: relative;
+          z-index: 1;
+          font-size: 0.8571em;
+          &::before {
+            background: $background-before;
+            border-radius: $border-radius_day;
+            display: block;
+            position: absolute;
+            opacity: 0;
+            content: "";
+            width: 100%;
+            top: 0;
+            height: 100%;
+            color: $color-highlighted;
+            font-weight: bold;
+            z-index: -1; 
+          }
+          &:hover{
+            color: $color-highlighted;
+            font-weight: bold;
+              &::before {
+              opacity: 0.5;
+            }
+          }
+        }
+
+        .pmu-disabled {
+          &::before {
+            display: none;
+          }
+          &:hover {
+            color: $color;
+            font-weight: 400;
+          }
+        }
+        .pmu-selected {
+          &.pmu-not-in-month {
+            color: $not-in-month;
+            &:hover {
+              color: $color-highlighted;
+              background : $not-in-month-selected-background;
+            }
+          }
+          &_begin, &_end, &_none {
+            &.pmu-today_inrange::before {
+              background: $background-before;
+            }
+            &.pmu-not-in-month
+            {
+              color: $color-highlighted;
+              ::before {
+                opacity: 0.8;
+              }
+              :hover::before {
+                opacity: 0.5;
+              }
+            }
+            z-index: 1;
+            color: $color-highlighted;
+            font-weight: bold;
+            &::before {
+              opacity: 1;
+            }
+          }
+          &_begin {
+            border-radius: $border-radius_day 0 0 $border-radius_day;
+          }
+          &_end {
+            border-radius: 0 $border-radius_day $border-radius_day 0;
+          }
+          &_none {
+            border-radius: $border-radius_day;
+          }
+          &:hover {
+            background : $selected-background;
+          }
+        }    
+        .pmu-today_inrange {
+          color: $color-highlighted;
+          font-weight: bold;
+          &:hover{
+              &::before {
+              opacity: 0.5;
+              background: $background-before;
+            }
+          }
+          &::before {
+            background: $today-background-25;
+            opacity: 1;
+          }
+          &.pmu-not-in-month {
+            color: $color-highlighted;
+          }
+          border-radius: 0;
+        }   
+      }
     }
-    position: relative;
     .pmu-div {
-      padding: 20px;
+      padding: 1.4286em;
       background-color: white;
       position: absolute;
       z-index: 2;
       top: 0;
-      border					: 1px solid $text_color25;
+      border: 1px solid $text_color25;
       border-radius: 4px;
       width: 100%;
       box-sizing: border-box;
@@ -218,128 +324,6 @@ $toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 
       display: flex;
       justify-content: space-between;
       padding-top: 1.4286em;
-      //padding-left: 1.429em;
-      //padding-right: 1.429em;
-      //padding-bottom: 1.429em;  
-    }
-    .pmu-day-of-week,
-    .pmu-days {
-
-      * {
-        display     : inline-block;
-        line-height : 3.3333em;
-        width       : 3.3333em;
-        position: relative;
-      }
-      .pmu-button {
-        position: relative;
-        z-index: 1;
-        font-size: 0.8571em;
-      }
-      .pmu-button::before {
-          background: $background-before;
-          border-radius: $border-radius_day;
-          display: block;
-          position: absolute;
-          opacity: 0;
-          content: "";
-          width: 100%;
-          top: 0;
-          height: 100%;
-          color: $color-highlighted;
-          font-weight: bold;
-          z-index: -1;
-          
-      }
-      .pmu-button:hover::before {
-        opacity: 0.5;
-        //background-color: red;
-      }
-      .pmu-button:hover {
-        color: $color-highlighted;
-        font-weight: bold;
-      }
-
-      .pmu-today_inrange::before {
-        background: $today-background-25;
-        border-radius: $border-radius_day;
-        display: block;
-        position: absolute;
-        opacity: 1;
-        content: "";
-        width: 100%;
-        top: 0;
-        height: 100%;
-        color: $color-highlighted;
-        font-weight: bold;
-        z-index: -1;
-      }
-      .pmu-today_inrange {
-        color: $color-highlighted;
-        font-weight: bold;
-      }
-      .pmu-selected_begin {
-        z-index: 1;
-        color: $color-highlighted;
-        font-weight: bold;
-        border-radius: $border-radius_day 0 0 $border-radius_day;
-        position: relative;
-      }
-      .pmu-selected_end {
-        z-index: 1;
-        color: $color-highlighted;
-        font-weight: bold;
-        border-radius: 0 $border-radius_day $border-radius_day 0;
-        position: relative;
-      }
-      .pmu-selected_begin::before, .pmu-selected_end::before, .pmu-selected_none::before {
-          background: $background-before;
-          border-radius: $border-radius_day;
-          display: block;
-          position: absolute;
-          content: "";
-          width: 100%;
-          top: 0;
-          height: 100%;
-          color: $color-highlighted;
-          font-weight: bold;
-          z-index: -1;
-          opacity: 1;
-      }
-      .pmu-today_inrange.pmu-selected_end::before,
-      .pmu-today_inrange.pmu-selected_begin::before,
-      .pmu-today_inrange.pmu-selected_none::before {
-        background: $today-background-25,
-        $background-before;
-      }
-      .pmu-not-in-month.pmu-selected_begin::before, 
-      .pmu-not-in-month.pmu-selected_end::before,
-      .pmu-not-in-month.pmu-selected_none::before {
-        opacity: 0.8;
-      }
-      
-      .pmu-not-in-month.pmu-selected_begin:hover::before,
-      .pmu-not-in-month.pmu-selected_end:hover::before {
-        opacity: 0.5;
-      }
-      .pmu-selected_none {
-        z-index: 1;
-        color: $color-highlighted;
-        font-weight: bold;
-        position: relative;
-        border-radius: $border-radius_day;
-      }
-      .pmu-instance:first-child:last-child .pmu-month {
-        //width : 12em;
-        width: 9em;
-    
-      }
-      .pmu-selected:hover {
-        background : $selected-background;
-      }
-      .pmu-selected.pmu-not-in-month:hover {
-        background : $not-in-month-selected-background;
-      }
     }
   }
 
@@ -669,9 +653,6 @@ $toogle_checked: "data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 
       border: 1px solid $text_color25;
       border-radius: 10px;
     }
-  }
-  &__toggleButtonsDiv {
-
   }
   &__toggleButtons { 
     display: flex;
