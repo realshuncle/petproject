@@ -1,0 +1,38 @@
+
+@import '../../theme/colors.scss';
+
+@function expand_more($opacity) {
+  @return "data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z' fill='#{encodecolor($text_color)}' fill-opacity='#{$opacity}'/%3E%3C/svg%3E";
+}
+.date-dropdown {
+  width: 100%;
+  user-select: none;
+  &__field {
+    width: 100%;
+  }
+  &__input {
+    width: 100%;
+    cursor: pointer;
+    background-image: url(expand_more(0.50));
+    background-repeat: no-repeat;
+    background-position: top 17px right 15px;
+    &:focus{
+      background-image: url(expand_more(0.75));
+    }
+  }
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;
+  }
+  &__glue {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 1.5em;
+  }
+}
