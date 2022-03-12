@@ -1,0 +1,8 @@
+include ../button/button.pug
+
+mixin calendar
+  .calendar
+    .calendar__body.calendar__body_hidden
+      .calendar__buttonsBar
+        +button('Очистить', 'button', 'clear', ['theme_simple', 'disabled'])
+        +button('Применить', 'button', 'apply', ['theme_simple'])
