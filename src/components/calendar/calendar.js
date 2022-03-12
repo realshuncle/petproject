@@ -55,7 +55,6 @@ for (let calendar of document.querySelectorAll('.calendar')) {
   //декоратор функции hide, нужен для того, чтобы не скрывать каленадрь при нажатии на блок pmu-div
   function hide(func) {
     return function(event, target) {
-      console.log(event);
       for (let el of event.path) {
         if (el?.name == 'apply')
           break;
