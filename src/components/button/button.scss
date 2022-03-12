@@ -1,0 +1,120 @@
+@import '../../theme/colors.scss';
+
+@function arrow_forward($color) {
+  @return "data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0.984375L17.0156 9L9 17.0156L7.59375 15.6094L13.1719 9.98438H0.984375V8.01562H13.1719L7.59375 2.39062L9 0.984375Z' fill='#{encodecolor($color)}'/%3E%3C/svg%3E";
+}
+
+button {
+  font-family: Montserrat;
+}
+.button {
+  //width: 100%;
+  //height: 100%;
+  background: none;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+  text-transform: uppercase;
+  &_theme {
+    &_simple {
+      color: $primary_color;
+      border: none;
+      &:active {
+        color: $text_color50;
+      }
+    }
+    &_border {
+      color: $primary_color;
+      background-image: linear-gradient(white, white), linear-gradient(180deg, $primary_color 0%, $primary_color_2 100%);
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      border: solid 2px transparent;
+      border-radius: 22px;
+      background-origin: border-box;
+      &:active {
+        color: $primary_color;
+        background-image: linear-gradient(white, white), linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+      }
+    }
+    &_fill {
+      //position: relative;
+      color: white;
+      background: linear-gradient(180deg, $primary_color 0%, $primary_color_2 100%);
+      background-clip: border-box;
+      background-origin: border-box;
+      border: solid 2px transparent;
+      border-radius: 22px;
+      background-origin: border-box;
+      
+      &:active {
+        //transition: background-image 2s;
+        //color: white;
+        background-image: linear-gradient(180deg, transparentize($primary_color, 0.5) 0%, transparentize($primary_color_2, 0.5) 100%);
+      }
+    }
+    &_wide {
+      height: 44px;
+    }
+    &_arrowed {
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        right: 0;
+        height: 44px;
+        width: 44px;
+        background-image: url(arrow_forward(white));
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+    }
+
+  }
+  &_disabled {
+    opacity: 0;
+  }
+  &_mod {
+    text-align: center;
+    
+    border: solid 2px transparent;
+    border-radius: 22px;
+    background-origin: border-box;
+  }
+  /*&_theme_border {
+    background-image: linear-gradient(white, white), linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    &:active {
+      color: $primary_color;
+      background-image: linear-gradient(white, white), linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+    }
+  }*/
+  &_theme_fill {
+    position: relative;
+    color: white;
+    background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+    background-clip: border-box;
+    background-origin: border-box;
+    &:active {
+      color: white;
+      background-image: linear-gradient(180deg, transparentize(#BC9CFF, 0.5) 0%, transparentize(#8BA4F9, 0.5) 100%);
+    }
+  }
+  &_theme_farr {
+    width: 320px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      right: 0;
+      height: 44px;
+      width: 44px;
+      //background-image: url(arrow_forward($white));
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+  }
+}

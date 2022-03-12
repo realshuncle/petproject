@@ -1,0 +1,2 @@
+mixin button(text = 'button', type = 'button', name = 'name', mod = ['simple'])
+  button.button(type = type, name = name, class = mod.map((modificator) => 'button_' + modificator)) #{text}
