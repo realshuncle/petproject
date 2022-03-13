@@ -62,6 +62,7 @@ export default class Dropdown {
     });
     this.applyButton.addEventListener('click', (e) => {
       this.menu.classList.add('dropdown__menu_hidden');
+      this.input.classList.remove('dropdown__input_opened');
     })
     this.clearButton.addEventListener('click', (e) => {
       this.clear();
