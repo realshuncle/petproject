@@ -1,12 +1,21 @@
 include ../calendar/calendar.pug
 
-mixin date-dropdown(label1 = 'Begin', label2 = 'End')
+mixin date-dropdown(config = {})
+  - defaultConfigSingle = {placeholder: 'ДД.ММ.ГГГГ', type: 'single', label: ['filter-date-dropdown'],  name: ['filter-date-dropdown']};
+  - defaultConfigDouble = {placeholder: 'ДД.ММ.ГГГГ', type: 'double', label: ['begin', 'end'],  name: ['begin', 'end']};
+  - if (config?.type == 'single')
+  -   config = Object.assign(defaultConfigSingle, config);
+  - else {
+  -   config = Object.assign(defaultConfigDouble, config);
+  -   config.type = 'double';
+  - }
   .date-dropdown
     .date-dropdown__glue
       .date-dropdown__field
-        label.date-dropdown__label #{label1}
-        input.date-dropdown__input(type='text', name='begin', placeholder='ДД.ММ.ГГГГ', readonly)
-      .date-dropdown__field
-        label.date-dropdown__label #{label2}
-        input.date-dropdown__input(type="text", name='end', placeholder='ДД.ММ.ГГГГ', readonly)
+        label.date-dropdown__label #{config.label[0]}
+        input.date-dropdown__input(type='text', name=config.name[0], placeholder=config.placeholder, readonly)
+      if (config.type == 'double')
+        .date-dropdown__field
+          label.date-dropdown__label #{config.label[1]}
+          input.date-dropdown__input(type="text", name=config.name[0], placeholder=config.placeholder, readonly)
     +calendar()
