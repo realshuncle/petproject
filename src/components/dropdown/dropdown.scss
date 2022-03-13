@@ -1,0 +1,91 @@
+@import '../../theme/colors.scss';
+@function expand_more($opacity) {
+  @return "data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z' fill='#{encodecolor($text_color)}' fill-opacity='#{$opacity}'/%3E%3C/svg%3E";
+}
+.dropdown {
+  user-select: none;
+  width: 100%;
+  position: relative;
+
+  &__input {
+    cursor: pointer;
+    text-overflow: ellipsis;
+    padding-right: 40px;
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    background-image: url(expand_more(0.50));
+    background-repeat: no-repeat;
+    background-position: top 17px right 15px;
+    &:focus, &:hover, &_opened
+    {
+      border-color: $text_color50; 
+      background-image: url(expand_more(0.75));
+    }
+  }
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;
+  }
+  &__menu {
+    transition: 2s;
+    opacity: 1;
+    position: absolute;
+    background-color: white;
+    &_hidden {
+      display: none;
+    }
+    z-index: 1;
+    box-sizing: border-box;
+    width: inherit;
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-left: 15px;
+    padding-bottom: 13px;
+    border: 1px solid $text_color50;
+    border-top: 0px;
+    border-radius: 0 0 4px 4px;
+
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;   
+  }
+  &__button {
+    font-size: 18px;
+    background-color: transparent;
+    border: 1px solid $text_color25;
+    color: $text_color50;
+    height: 30px;
+    width: 30px;
+    border-radius: 22px;
+    &_disabled {
+      border-color: transparentize($text_color, 0.9);
+      color: $text_color25;
+    }
+  }
+  &__counter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 92px;
+  }
+  &__buttons-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}
