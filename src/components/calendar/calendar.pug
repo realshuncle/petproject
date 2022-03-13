@@ -4,5 +4,5 @@ mixin calendar
   .calendar
     .calendar__body.calendar__body_hidden
       .calendar__buttonsBar
-        +button('Очистить', 'button', 'clear', ['theme_simple', 'disabled'])
-        +button('Применить', 'button', 'apply', ['theme_simple'])
+        +button({text: 'Очистить', name: 'clear', mod: ['disabled']})
+        +button({text: 'Применить', name: 'apply'})
