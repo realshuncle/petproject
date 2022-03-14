@@ -1,0 +1,13 @@
+mixin text-field(config = {})
+  - defaultConfig = {label: '', pattern: false, placeholder: 'placeholder', name: 'dropdown', mod: [], required: false, type: 'text'};
+  - config = Object.assign(defaultConfig, config);
+  .text-field
+    if (config.label != '')
+      .text-field__label #{config.label}
+    input.text-field__input(placeholder = config.placeholder, name = config.name, class = config.mod.map((modificator) => 'text-field__input_' + modificator), required = config.required, pattern = config.pattern, type = config.type)
+
+mixin subscrTextField()
+  //.form__text-field-div 
+  .form__text-field-glue
+    input(type="email", name=name, placeholder='Email', pattern="[^@\s]+@[^@\s]+\.[^@\s]+", required, class="form__text-field form__text-field_subscr" class = mod)
+    button(type="submit", class="form__subscrSubmit")
