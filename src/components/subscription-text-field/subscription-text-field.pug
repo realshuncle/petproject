@@ -1,0 +1,8 @@
+mixin subscription-text-field(config = {})
+  - defaultConfig = {label: '', placeholder: 'Email', name: 'email', mod: [], required: true, type: 'email'};
+  - config = Object.assign(defaultConfig, config);
+  .subscription-text-field
+    if (config.label != '')
+      .subscription-text-field__label #{config.label}
+    input.subscription-text-field__input(placeholder = config.placeholder, name = config.name, class = config.mod.map((modificator) => 'subscription-text-field__input_' + modificator), required = config.required, pattern = config.pattern, type = config.type)
+    button(type="submit", class="subscription-text-field__button")
