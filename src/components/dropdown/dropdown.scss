@@ -10,6 +10,20 @@
   &__input {
     cursor: pointer;
     text-overflow: ellipsis;
+    height: 44px;
+    padding-left: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    border: 1px solid $text_color25;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: $text_color75;
+    &:focus, &:hover{
+      border-color: $text_color50;
+    }
+    &::placeholder {
+      color: $text_color25; 
+    }
     padding-right: 40px;
     border-radius: 4px 4px 0 0;
     width: 100%;

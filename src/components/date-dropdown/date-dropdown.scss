@@ -13,6 +13,20 @@
   &__input {
     width: 100%;
     cursor: pointer;
+    height: 44px;
+    padding-left: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    border: 1px solid $text_color25;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: $text_color75;
+    &:focus, &:hover{
+      border-color: $text_color50;
+    }
+    &::placeholder {
+      color: $text_color25; 
+    }
     background-image: url(expand_more(0.50));
     background-repeat: no-repeat;
     background-position: top 17px right 15px;
