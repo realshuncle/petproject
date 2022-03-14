@@ -1,7 +1,7 @@
 mixin text-field(config = {})
-  - defaultConfig = {label: '', pattern: false, placeholder: 'placeholder', name: 'dropdown', mod: [], required: false, type: 'text'};
+  - defaultConfig = {label: 'text-field', pattern: false, placeholder: 'placeholder', name: 'dropdown', mod: [], required: false, type: 'text'};
   - config = Object.assign(defaultConfig, config);
   .text-field
-    if (config.label != '')
+    if (config.label)
       .text-field__label #{config.label}
     input.text-field__input(placeholder = config.placeholder, name = config.name, class = config.mod.map((modificator) => 'text-field__input_' + modificator), required = config.required, pattern = config.pattern, type = config.type)

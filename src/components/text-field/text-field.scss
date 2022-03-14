@@ -19,5 +19,13 @@
       color: $text_color25; 
     }
   }
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;
+  }
   box-sizing: border-box;
 }
