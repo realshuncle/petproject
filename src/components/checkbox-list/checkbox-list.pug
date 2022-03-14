@@ -1,0 +1,19 @@
+mixin checkbox-list(config = {})
+  - defaultConfig = {rich: false, expandable: false, label: 'checkbox-list',  name: 'checkbox-list', items: [{text: 'label1', sign: 'text1'}, {text: 'label2', sign: 'text2'}]};
+  - config = Object.assign(defaultConfig, config);
+  .checkbox-list(data-expandable = config.expandable)
+    - let closed = config.expandable ? 'checkbox-list__button_closed' : false;
+    button.checkbox-list__button(disabled = !config.expandable, type = 'button', class = closed) #{config.label}
+    - let hidden = config.expandable ? 'checkbox-list__menu_hidden' : false;
+    ul.checkbox-list__menu(class = hidden)
+      each item in config.items
+        li.checkbox-list__item
+          label.checkbox-list__label
+            input.checkbox-list__checkbox(type="checkbox")
+            if (config.rich)
+              .checkbox-list__checkbox-label
+                .checkbox-list__text_bold #{item.text}
+                .checkbox-list__text_sign #{item.sign} 
+            else
+              .checkbox-list__checkbox-label               
+                .checkbox-list__text #{item.text}

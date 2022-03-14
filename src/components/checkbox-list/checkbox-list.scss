@@ -1,0 +1,114 @@
+@import '../../theme/colors.scss';
+
+$checkbox_checked: "data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.46439 2.29245L5.70703 6.53509L4.29282 7.9493L0.0501771 3.70666L1.46439 2.29245Z' fill='url(%23paint0_linear_18381_239)'/%3E%3Cpath d='M8.53546 0.878232L9.94967 2.29245L4.29282 7.9493L2.8786 6.53509L8.53546 0.878232Z' fill='url(%23paint1_linear_18381_239)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_18381_239' x1='7.82835' y1='0.171125' x2='2.1715' y2='5.82798' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='#{encodecolor($primary_color)}'/%3E%3Cstop offset='1' stop-color='#{encodecolor($primary_color_2)}'/%3E%3C/linearGradient%3E%3ClinearGradient id='paint1_linear_18381_239' x1='7.82835' y1='0.171125' x2='2.1715' y2='5.82798' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='#{encodecolor($primary_color)}'/%3E%3Cstop offset='1' stop-color='#{encodecolor($primary_color_2)}'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A";
+
+$empty: "data:image/svg+xml,%3Csvg width='1' height='1' viewBox='0 0 1 1' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-opacity='0'/%3E%3C/svg%3E";
+
+@function expand_more($opacity) {
+  @return "data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.5938 0.578125L12 1.98438L6 7.98438L0 1.98438L1.40625 0.578125L6 5.17188L10.5938 0.578125Z' fill='#{encodecolor($text_color)}' fill-opacity='#{$opacity}'/%3E%3C/svg%3E";
+}
+@function expand_up($opacity) {
+  @return "data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.40625 7.42187L1.74709e-06 6.01562L6 0.0156231L12 6.01562L10.5938 7.42187L6 2.82812L1.40625 7.42187Z' fill='#{encodecolor($text_color)}' fill-opacity='#{$opacity}'/%3E%3C/svg%3E%0A";
+}
+
+.checkbox-list {
+  user-select: none;
+  width: 100%;
+  &__button {
+    height: 44px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: left;
+    padding: 0;
+    margin-bottom: 0;
+    border: 0;
+    width: 100%;
+    background: none;
+    
+    &_closed {
+      background-image: url(expand_more(0.5));
+      background-repeat: no-repeat;
+      background-position: calc(100% - 12px) center;
+    }
+    &_opened {
+      background-image: url(expand_up(0.5));
+    }
+
+  }
+  &__label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  &__checkbox:checked + &__checkbox-label::before {
+    transition-property: border, background-image;
+    background-image: url($checkbox_checked);
+    border-color: $primary_color;
+    transition: .3s;
+
+  }
+  &__checkbox-label {
+    padding-left: 10px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    &::before {
+      transition: .3s;
+      transition-property: border, background-image;
+      //opacity: 1;
+      background-image: url("data:image/svg+xml,%3Csvg width='1' height='1' viewBox='1 1 1 1' fill='none'");
+      background-image: url($empty);
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      //background-color: red;
+      border: 1px solid $text_color25;
+      border-radius: 4px;
+      opacity: 1;
+      background-repeat: no-repeat;
+      background-position-x: center;
+      background-position-y: center;
+    }
+  }
+  &__text {
+    color: $text_color50;
+    &_bold {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      color: $text_color75;
+    }
+    &_sign {
+      font-size: 12px;
+      line-height: 14px;
+      color: $text_color50;
+    }
+  }
+  &__checkbox {
+    flex-shrink: 0;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    z-index: -1;
+    opacity: 0;
+  }
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &_hidden {
+      display: none;
+    }
+  }
+
+}
+
