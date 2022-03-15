@@ -9,19 +9,3 @@ mixin toggle-button(config = {})
         label.toggle-button__item
           input.toggle-button__button(type = "checkbox", name = config.name)
           .toggle-button__text #{item}
-
-mixin toggleButtons([label, btlabels = []])
-  .form__toggleButtonsDiv
-    .form__label #{label}
-    .form__toggleButtons
-      each eb in btlabels
-        label.form__toggleButton
-          input.form__checkbox(type = "checkbox")
-          .form__tblabel #{eb}
-
-mixin toggleButton(label = 'toggle label')
-  .form__toggleButtonsDiv
-    .form__toggleButtons
-      label.form__toggleButton
-        input.form__checkbox(type = "checkbox")
-        .form__tblabel #{label}
