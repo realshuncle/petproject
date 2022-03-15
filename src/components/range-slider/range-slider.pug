@@ -1,0 +1,9 @@
+mixin range-slider(config = {})
+  - defaultConfig = {label: 'range-slider',  caption: 'caption for range-slider', name: 'range-slider'};
+  - config = Object.assign(defaultConfig, config);
+  .range-slider(name = config.name)
+    .range-slider__glue
+      .range-slider__label #{config.label}
+      .range-slider__range
+    .range-slider__slider
+    .range-slider__caption #{config.caption}

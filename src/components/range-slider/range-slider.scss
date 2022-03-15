@@ -1,0 +1,65 @@
+@import '../../theme/colors.scss';
+
+.range-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $text_color;
+    text-transform: uppercase;
+  }
+  &__glue {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  &__range {
+    color: $text_color50;
+  }
+  &__slider {
+    .noUi-handle {
+      cursor: pointer;
+      background: linear-gradient(180deg, $secondary_color 0%, $secondary_color_2 100%);
+      width: 14px;
+      height: 14px;
+      border-radius: 10px;
+      border: 2px solid #FFFFFF;
+      box-shadow: none;
+      top: -5px;
+      right: -7px;
+      &::before ,&::after {
+        display: none;
+      }   
+    }
+    .noUi-touch-area {
+      display: none;
+    }
+    .noUi-base {
+      cursor: pointer;
+      height: 6px;
+      border: 1px solid $text_color25;
+      border-radius: 3px;
+    }
+    border: none;
+    background: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .noUi-connect {
+      background: linear-gradient(180deg, $secondary_color 0%, $secondary_color_2 100%);
+    }
+    .noUi-connects {
+      height: 6px;
+      top: -1px;
+    }
+  }
+  &__caption {
+    color: $text_color50;
+  }
+}
