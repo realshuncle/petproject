@@ -23,7 +23,10 @@
   }
   &__slider {
     .noUi-handle {
-      cursor: pointer;
+      &:active {
+        cursor: grabbing;
+      }
+      cursor: grab;
       background: linear-gradient(180deg, $secondary_color 0%, $secondary_color_2 100%);
       width: 14px;
       height: 14px;
