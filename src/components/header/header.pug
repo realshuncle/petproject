@@ -1,18 +1,41 @@
-mixin header()
-  .headerPlug
-  header
-    .header
-      nav
-        ul
-          li
-            a.header__(href="") О нас
-          li
-            a.header__(href="") Услуги
-          li
-            a.header__(href="") Вакансии
-          li
-            a.header__(href="") Новости
-          li
-            a.header__(href="") Соглашения
-      a.button.button_mod.button_theme_border(href="") Войти
-      a.button.button_mod.button_theme_fill(href="") Зарегестрироваться
+include ../button/button.pug
+
+mixin header(config = {})
+  - let defaultLink = {href: '#undefined', text: 'linktext'};
+  - let defaultButton = {href: '#undefined', text: 'button', theme: ['fill']};
+  - let defaultConfig = {links: [{}, {dropdown: [{}, {}]}, {}, {}, {dropdown: [{}, {}]}], buttons: [{},{}], logo: '#undefined'};
+  - config = Object.assign(defaultConfig, config);
+  - for (let i = 0; i < config.links.length; i++) {config.links[i] = Object.assign(Object.assign({}, defaultLink), config.links[i]); 
+  -  if (config.links[i].dropdown) {
+  -     for (let j = 0; j < config.links[i].dropdown.length; j++) {
+  -       config.links[i].dropdown[j] = Object.assign(Object.assign({}, defaultLink), config.links[i].dropdown[j]);
+  -     }
+  -   }
+  - }
+  - for (let i = 0; i < config.buttons.length; i++) { 
+  -  config.buttons[i] = Object.assign(Object.assign({}, defaultButton), config.buttons[i]);
+  - }
+  .header
+    .header__plug
+    header.header__body
+      .header__container
+        a.header__logo(href=config.logo)
+        input.header__menu(type="checkbox")       
+        .header__empty     
+        nav.header__nav
+          ul.header__list
+            each link in config.links
+              li.header__list-item
+                if (link.dropdown)
+                  .header__link.header__link_expanded #{link.text}
+                    .header__dropdown
+                        each dropdownLink in link.dropdown
+                          a.header__link(href=dropdownLink.href) #{dropdownLink.text}
+                else
+                  a.header__link(href=link.href) #{link.text}
+        .header__buttons-bar
+          each button in config.buttons
+            - button.theme.push('link');
+            +button({text: button.text, theme: button.theme, href: button.href})
+          //+button({text: 'Зарегистрироваться', theme: ['fill', 'link'], link:true})
+
