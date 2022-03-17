@@ -69,7 +69,11 @@ button {
         background-repeat: no-repeat;
       }
     }
-
+    &_link {
+      height: 34px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
   &_disabled {
     opacity: 0;
