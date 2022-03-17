@@ -17,7 +17,7 @@ $empty: "data:image/svg+xml,%3Csvg width='1' height='1' viewBox='0 0 1 1' fill='
   &__button {
     display: flex;
     align-items: center;
-    height: 44px;
+    height: 15px;
     font-weight: bold;
     color: $text_color;
     text-transform: uppercase;
@@ -104,6 +104,7 @@ $empty: "data:image/svg+xml,%3Csvg width='1' height='1' viewBox='0 0 1 1' fill='
     opacity: 0;
   }
   &__menu {
+    padding-top: 17px;
     display: flex;
     flex-direction: column;
     gap: 10px;
