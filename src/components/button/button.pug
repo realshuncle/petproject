@@ -1,4 +1,7 @@
 mixin button(config = {})
   - defaultConfig = {text: 'button', type: 'button', name: 'button', mod: [''], theme: ['simple']}; 
   - config = Object.assign(defaultConfig, config);
-  button.button(type = config.type, name = config.name, class = config.mod.map((modificator) => 'button_' + modificator), class = config.theme.map((theme) => 'button_theme_' + theme)) #{config.text}
+  if (config.href)
+    a.button(type = config.type, name = config.name, class = config.mod.map((modificator) => 'button_' + modificator), class = config.theme.map((theme) => 'button_theme_' + theme), href=config.href) #{config.text}
+  else
+    button.button(type = config.type, name = config.name, class = config.mod.map((modificator) => 'button_' + modificator), class = config.theme.map((theme) => 'button_theme_' + theme)) #{config.text}
