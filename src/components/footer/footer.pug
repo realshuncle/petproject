@@ -1,4 +1,4 @@
-include ../form/form.pug
+include ../../components/subscription-text-field/subscription-text-field.pug
 
 mixin footer()
   footer
@@ -39,7 +39,8 @@ mixin footer()
           .footer__label Подписка
           .footer__text Получайте специальные предложения и новости сервиса
           form.footer__form(action="")
-            +subscrTextField(['subscription text field'])
+            +subscription-text-field()
+            //+subscrTextField(['subscription text field'])
     .footer__bottomElement
       .footer__container
         .footer__text Copyright © 2018 Toxin отель. Все права защищены.

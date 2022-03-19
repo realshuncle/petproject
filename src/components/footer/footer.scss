@@ -1,9 +1,6 @@
 @import '../../theme/colors.scss';
 footer {
-  //top: 0;
   background-color: white;
-  //z-index: 100;
-  //position: fixed;
   width: 100%;
 }
 .footer {
@@ -11,15 +8,23 @@ footer {
     padding-top: 100px;
     padding-bottom: 100px;
     max-width: 1160px;
-    margin: auto;
-    //text-align: center;
-  
+    margin: auto;  
     line-height: 24px;
     
     ul {
+      @media screen and (max-width: 950px) {
+        flex-direction: row;
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+        flex-wrap: wrap;
+        row-gap: 0px;
+        justify-content: center;
+      }
       display: flex;
       flex-direction: column;
       gap: 21px;
+
       width: 200px;
       box-sizing: border-box;
       padding-left: 10px;
@@ -30,7 +35,11 @@ footer {
           text-decoration: none;
         }
         &:first-child {
+          @media screen and (max-width: 950px) {
+            text-align: center;
+          }
           font-weight: bold;
+          width: 100%;
         }
       }
     }
@@ -38,6 +47,11 @@ footer {
   
 
   &__logo {
+    @media screen and (max-width: 950px) {
+      background-position-x: center;
+      text-align: center;
+      padding-right: 0px;
+    }
     padding-top: 60px;
     padding-right: 40px;
     max-width: 260px;
@@ -46,6 +60,10 @@ footer {
   }
  
   &__subsrcdiv {
+    @media screen and (max-width: 950px) {
+      text-align: center;
+      gap: 0px;
+    }
     display: flex;
     flex-direction: column;
     gap: 21px;
@@ -55,10 +73,21 @@ footer {
     font-weight: bold;
   }
   &__container {
-    max-width: 1160px;
+    box-sizing: border-box;
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: auto;
     display: flex;
     justify-content: space-between;
+    gap: 21px;
+    @media screen and (max-width: 950px) {
+      flex-direction: column;
+      align-items: center;
+      .footer__text {
+        padding-bottom: 21px;
+      }
+    }
   }
   &__bottomElement {
     
