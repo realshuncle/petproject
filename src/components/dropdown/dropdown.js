@@ -80,10 +80,13 @@ export default class Dropdown {
   formString() {
     let result = '';
     for (let group of this.value.keys()) {
-      if (result) {
-        result += ', ';
+      if (this.value.get(group) != 0) {
+        if (result) {
+          result += ', ';
+        }
+        result += this.value.get(group) + ' ' + this.declOfNum(this.value.get(group), this.groups.get(group));
       }
-      result += this.value.get(group) + ' ' + this.declOfNum(this.value.get(group), this.groups.get(group));
+
     }
     return result;
   }
