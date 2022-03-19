@@ -1,32 +1,36 @@
 include ../rating/rating.pug
 
-.catalog
+mixin catalog(config = {size})
+  .d
 
 mixin catalog__element(imageSrc = ["./img/image.png", './img/image2.png', './img/image3.png'], number = "000", price = "1 000", rating = 3, rev = 145, isLux = true)
   .catalog__element
     .catalog__swiper.swiper
       .swiper-wrapper
-        each img in imageSrc
+        //each img in imageSrc
           .swiper-slide
             img(src=require(`${img}`), alt="")
       .swiper-pagination
       .swiper-button.swiper-button-prev
       .swiper-button.swiper-button-next
-    .catalog__elementWrapper
+    a.catalog__elementWrapper(href='#undef')
       .catalog__elementGlue
         .catalog__elementText
-          span.width_bold.color_black №
-          span.width_bold.size_large.color_black &nbsp;#{number}
+          span.width_bold.color_black
+          span.width_bold.size_large.color_black &nbsp;
           if (isLux)
             span.width_bold.color_primary.size_small &nbsp; Люкс
         .catalog__elementText
-          span.width_bold #{price}₽
-          span.size_small &nbsp;в сутки
+          span.width_bold 
+          span.size_small &nbsp;
       .catalog__elementGlue
-        +rating(rating)
+        .rating
+          - for (let i = 0; i < 5; i++)
+            .rating__star
         .catalog__elementText
-          span.width_bold  #{rev}
-          if (rev % 100 > 10 && rev % 100 < 20)
+          span.width_bold 
+          span
+        //if (rev % 100 > 10 && rev % 100 < 20)
             | &nbsp; Отзывов
           else if (rev % 10 > 1 && rev % 10 < 5)
             | &nbsp; Отзыва
