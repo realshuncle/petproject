@@ -1,0 +1,76 @@
+@import '../../theme/colors.scss';
+.chart {
+  display: flex;
+  gap: 30px;
+  &__wrapper {
+    width: 120px;
+    height: 120px;
+    position: relative;
+  }
+  &__text {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    position: absolute;
+    color: $primary_color;
+  }
+  &__sign {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 15px;
+    text-transform: uppercase;
+  }
+  &__number {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 29px;
+    display: block;
+    text-align: center;
+  }
+  &__legend {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;  
+  }
+  &__label {
+    padding-left: 15px;
+    position: relative;
+    &::before {
+      height: 10px;
+      width: 10px;
+      border-radius: 10px;
+      content: '';
+      display: block;
+      //background-color: red;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%); 
+    }
+    &_theme {
+      &_excellent {
+        &::before {
+          background: linear-gradient(180deg, #FFE39C 0%, #FFBA9C 100%);
+        }
+      }
+      &_good {
+        &::before {
+          background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+        }
+      }
+      &_fair {
+        &::before {
+          background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+        }
+      }
+      &_bad {
+        &::before {
+          background: linear-gradient(180deg, #919191 0%, #3D4975 100%);
+        }
+      }
+    }
+  }
+}
