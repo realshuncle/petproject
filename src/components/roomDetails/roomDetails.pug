@@ -1,10 +1,13 @@
-mixin roomDetails(inform)
+mixin room-details(config = {})
+  - defultDetails = {label: 'detail-title', text: 'detail-text', theme: 'example',}
+  - defaultConfig = {details: [{}, {}]};
+  - config = Object.assign(defaultConfig, config);
+  - for (let i = 0; i < config.details.length; i++) { 
+  -  config.details[i] = Object.assign(Object.assign({}, defultDetails), config.details[i]);
+  - }
   .roomDetails
-    each inf in inform
-      .roomDetails__Glue(class = inf[0])
-        .roomDetails__Label #{inf[1]}
-        .roomDetails__Text #{inf[2]}
+    each detail in config.details
+      .roomDetails__Glue(class = 'roomDetails__Glue_theme_' + detail.theme)
+        .roomDetails__Label #{detail.label}
+        .roomDetails__Text #{detail.text}
       .roomDetails__line
-
-
-
