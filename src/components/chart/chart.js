@@ -12,11 +12,14 @@ export default class DoughnatChart {
     let sum = this.data.reduce((p,c) => p + c, 0);
     for (let i = 0; i < 4; i++) {
       let y0 = Math.round(60*(1 - Math.sin(Math.PI / 2 - temp * 2 * Math.PI/ sum )));
-      let x0 = Math.round(60*(1 - Math.cos(Math.PI / 2 + temp * 2 * Math.PI/ sum )));
       temp += this.data[i];
       let y1 = Math.round(60*(1 - Math.sin(Math.PI / 2 - temp * 2 * Math.PI/ sum )));
-      let x1 = Math.round(60*(1 - Math.cos(Math.PI / 2 + temp * 2 * Math.PI/ sum )));
-      this.gradients.push(this.context.createLinearGradient(Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1)));
+      if (Math.PI / 2 - temp * 2 * Math.PI/ sum < - Math.PI / 2 &&
+      Math.PI / 2 - (temp - this.data[i]) * 2 * Math.PI/ sum > - Math.PI / 2) {
+        y0 = Math.min(y0, y1);
+        y1 = 120;
+      }
+      this.gradients.push(this.context.createLinearGradient(60, Math.min(y0, y1), 60, Math.max(y0, y1)));
       this.gradients[i].addColorStop(0, this.colors[i][0]);
       this.gradients[i].addColorStop(1, this.colors[i][1]);
     }
