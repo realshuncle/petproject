@@ -68,8 +68,7 @@ for (let calendar of document.querySelectorAll('.calendar')) {
   calendar.__pickmeup.options.bound.hide = hide(calendar.__pickmeup.options.bound.hide);
   calendar.show = pickmeup(calendar).show;
   calendar.setFont = function(size) {
-    //console.log(this.style);
-    this.style.fontSize = size;
+    this.style.fontSize = size + 'px';
   };
   //выбор необходимого календаря
   let pmu = calendar.__pickmeup.element;

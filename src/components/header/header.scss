@@ -46,8 +46,12 @@ $menu-button: "data:image/svg+xml,%3Csvg viewBox='0 0 100 80' width='40' height=
       display: block;
     }
   }
-  &__menu:checked ~ &__nav,
+  &__menu:checked ~ &__nav {
+    padding-top: 10px;
+    display: flex;
+  }
   &__menu:checked ~ &__buttons-bar {
+    padding-top: 10px;
     display: flex;
   }
   transition: all .3s ease;

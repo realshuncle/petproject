@@ -36,8 +36,6 @@ let rooms = [];
 for (let i = 1; i < 13; i++) {
 	rooms.push(require(`./img/room${i}.png`))
 }
-let x = require(`./img/room${1}.png`);
-let y = require('./img/image2.png');
 //console.log('1', x);
 for (let catalog of document.querySelectorAll('.catalog')) {
 	let c = new Catalog({element: catalog, size: 12, 
@@ -129,10 +127,11 @@ for (let catalog of document.querySelectorAll('.catalog')) {
 		},
 	],
 });
+window.addEventListener('DOMContentLoaded', (event) => {
+	$('body,html').animate({scrollTop: 0}, 0);  
+	//calendar.setFont(dateDropdown.offsetWidth * 14 / 320);
+});
 
-window.onload = () => {
-	window.scrollBy(0);
-};
 $('.catal').pagination({
 	dataSource:[
 		{
