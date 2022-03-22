@@ -1,13 +1,67 @@
 include ../../components/form/form.pug
-include ../../components/roomDetails/roomDetails.pug
 include ../../components/likeButton/likeButton.pug
 include ../../components/rateButton/rateButton.pug
 include ../../components/rating/rating.pug
-include ../../components/bulletList/bulletList.pug
 include ../../components/review/review.pug
 include ../../components/header/header.pug
 include ../../components/footer/footer.pug
+include ../../components/date-dropdown/date-dropdown.pug
+include ../../components/dropdown/dropdown.pug
+include ../../components/button/button.pug
 
+include ../../components/chart/chart.pug
+
+-let headerConfig = {
+- logo: './main.html',
+-	links: [
+-		{
+-			text: 'О нас'
+-		}, 
+-		{
+-			text: 'Услуги',
+-			dropdown: [
+-				{
+-					text: 'Услуга 1'
+-				}, 
+-				{
+-					text: 'Услуга 2'
+-				}, 
+-				{
+-					text: 'Услуга 3'
+-				}
+-		]
+-		}, 
+-		{
+-			text: 'Вакансии'
+-		}, 
+-		{
+-			text: 'Новости'
+-		}, 
+-		{
+-			text: 'Соглашения',
+-			dropdown: [
+-				{
+-					text: 'Соглашение 1'
+-				},  
+-				{
+-					text: 'Соглашение 2'
+-				}
+-			]
+-		}
+-	], 
+-	buttons: [
+-		{
+-			text: 'Войти', 
+-			theme: ['border'],
+-     href: './login.html',
+-		}, 
+-		{
+-			text: 'Зарегистрироваться', 
+-			theme: ['fill'],
+-     href: './registration.html',
+-		}
+-	]
+-}
 
 doctype html
 html(lang="en")
@@ -16,8 +70,8 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Document
-  body    
-    +header
+  body.main    
+    +header(headerConfig)
     .swiper
       .swiper-wrapper
         .swiper-slide
@@ -66,10 +120,11 @@ html(lang="en")
         //+review('Мурад Сарафанов', '5 дней назад', 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.', '12', '../../theme/img/image.svg')
 
         form.form(action="")
-          +formTitle('Найдём номера под ваши пожелания')
-          +date-dropdowns(['Прибытие', 'Выезд'])
-          +dropdown-with-menu(['Гости', 'some-text', 'Сколько гостей'], [['Взрослые', 'Дети', 'Младенцы']], "form__dropdown-with-menu_guest")
-          button.form__button.form__button_mod.form__button_theme_fill.form__button_theme_farr Подобрать номер
+          +form__Title('Найдём номера под ваши пожелания')
+          +date-dropdown({label: ['Прибытие', 'Выезд']})
+          +dropdown({label: 'Гости', placeholder: 'Сколько гостей', name: 'guest-dropdown', items: [{text: 'взрослые', group: 'гости'}, {text: 'дети', group: 'гости'}, {text: 'младенцы'}]})
+          +button({text: 'Подобрать номер', theme: ['fill', 'wide', 'arrowed'], href: './search-room.html'})
+          //button.form__button.form__button_mod.form__button_theme_fill.form__button_theme_farr Подобрать номер
 
         //form.form(action="")
           +formTitle('Регистрация акаунту')

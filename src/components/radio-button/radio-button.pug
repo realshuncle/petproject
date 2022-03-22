@@ -1,5 +1,5 @@
 mixin radio-button(config = {})
-  - defaultConfig = {label: 'radio-button', buttons: ['first', 'second'],  name: 'radio'}
+  - defaultConfig = {label: 'radio-button', buttons: ['first', 'second'],  name: 'radio', required: false}
   - config = Object.assign(defaultConfig, config);
   .radio-button
     if (config.label)
@@ -7,5 +7,5 @@ mixin radio-button(config = {})
     .radio-button__glue
       each button in config.buttons
         label.radio-button__item
-          input.radio-button__button(type = "radio" name=config.name)
+          input.radio-button__button(type = "radio" name=config.name required=config.required)
           .radio-button__text #{button}

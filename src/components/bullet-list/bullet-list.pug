@@ -1,0 +1,7 @@
+mixin bullet-list(config = {})
+  - defaultConfig = {items: ['first', 'second', 'third']};
+  - config = Object.assign(defaultConfig, config);
+  .bullet-list
+    ul
+      each item in config.items
+        li #{item}

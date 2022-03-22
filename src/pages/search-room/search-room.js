@@ -130,7 +130,9 @@ for (let catalog of document.querySelectorAll('.catalog')) {
 	],
 });
 
-
+window.onload = () => {
+	window.scrollBy(0);
+};
 $('.catal').pagination({
 	dataSource:[
 		{
@@ -140,6 +142,7 @@ $('.catal').pagination({
 			price: 9990,
 			rating: 5,
 			review: 145,
+			href: './room-details.html'
 		},
 		{
 			images: [rooms[1], rooms[11], rooms[8], rooms[7]],

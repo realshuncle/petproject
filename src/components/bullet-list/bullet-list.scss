@@ -1,4 +1,8 @@
-.bulletList {
+@function bullet() {
+  @return "data:image/svg+xml,%3Csvg width='11' height='10' viewBox='0 0 11 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='5.21429' cy='5' rx='5.21429' ry='5' fill='%231F2041' fill-opacity='0.25'/%3E%3C/svg%3E%0A";
+}
+
+.bullet-list {
   h3 {
     margin-bottom: 16px;
   }
@@ -11,7 +15,7 @@
       line-height: 24px;
       position: relative;
       &::before {
-        background-image: url('./img/ellipse.svg');
+        background-image: url(bullet());
         content: '';
         height: 10px;
         width: 11px;

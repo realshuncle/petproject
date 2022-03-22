@@ -5,17 +5,13 @@ include ../../components/rating/rating.pug
 include ../../components/review/review.pug
 include ../../components/header/header.pug
 include ../../components/footer/footer.pug
-include ../../components/catalog/catalog.pug
-
-include ../../components/button/button.pug
 include ../../components/date-dropdown/date-dropdown.pug
 include ../../components/dropdown/dropdown.pug
+include ../../components/button/button.pug
 include ../../components/text-field/text-field.pug
-include ../../components/subscription-text-field/subscription-text-field.pug
-include ../../components/checkbox-list/checkbox-list.pug
 include ../../components/radio-button/radio-button.pug
 include ../../components/toggle-button/toggle-button.pug
-include ../../components/range-slider/range-slider.pug
+include ../../components/button/button.pug
 
 -let headerConfig = {
 - logo: './main.html',
@@ -76,66 +72,31 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Document
-  body.search-room
-    +header(headerConfig)   
-    .container.catalog_page
-      section
-        form.search-room__form(action="")
-          +date-dropdown({type: 'single', label: ['Даты пребывания в отеле']})
-          +dropdown({label: 'Гости', placeholder: 'Сколько гостей', name: 'guest-dropdown', items: [{text: 'взрослые', group: 'гости'}, {text: 'дети', group: 'гости'}, {text: 'младенцы'}]})
-          +range-slider({name: 'my-slider', caption: 'Стоимость за сутки пребывания в номере', label: 'Диапазон цены'})
-          +checkbox-list({label: 'Правила дома', items: [{text: 'Можно курить'}, {text: 'Можно с питомцами'}, {text: 'Можно пригласить гостей (до 10 человек)'}]})
-          +checkbox-list({label: 'Доступность', rich: true, items: [{text: 'Широкий коридор', sign: 'Ширина коридоров в номере не менее 91 см.'}, {text: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'}]})
-          +dropdown({label: 'Удобства номера', placeholder: 'Удобства', name: 'facilities-dropdown', items: [{text: 'спальни'}, {text: 'кровати'}, {text: 'ванные комнаты'}]})
-          +checkbox-list({label: 'expandable checkbox list', expandable: true, items: [{text: 'Завтрак'}, {text: 'Письменный стол'}, {text: 'Стул для кормления'}, {text: 'Кроватка'}, {text: 'Телевизор'}, {text: 'Шампунь'}]})
-          
-          //+radio-button({label: false, buttons: ['Мучжчина', 'Женщина']})
-            +toggle-button({label: false, items: ['Получать спецпредложения']})
-
-            +date-dropdown({label: ['Прибытие', 'Выезд']})
-
-
-            +text-field({label: false})
-            +text-field({mod: ['masked'], label: false})
-            +subscription-text-field()
-
-
-
-            +button({text: 'Применить', type: 'submit'})
-            +button({text: 'Применить', theme: ['border', 'wide']})
-            +button({text: 'Применить', theme: ['fill', 'wide']})
-            +button({text: 'Применить', theme: ['fill', 'wide', 'arrowed']})
-
-
-
-      section
-        .catalog
-        .catal
-          //a(href="") 
-          //+catalog__element()
-            +catalog__element()
-            +catalog__element()
-            +catalog__element()
-            +catalog__element()
-            +catalog__element()
-            +catalog__element()
-            +catalog__element()
-            +catalog__element()
-    //.swiper
-      .swiper-wrapper
-        .swiper-slide
-          img(src=require("./img/image3.png"), alt="")
-          //.container Лучшие номера для вашей работы, отдыха и просто вдохновения
-        .swiper-slide
-          img(src=require("./img/image2.png"), alt="")
-          //.container
-        .swiper-slide
-          img(src=require("./img/image.png"), alt="")
-          //.container
-      .container
-        .swiper-text Лучшие номера для вашей работы, отдыха и просто вдохновения
+  body.login    
+    +header(headerConfig)
     .content
       .container
+        form.login-form(action="")
+          .login-form__title Войти
+          fieldset.login-form__field
+            +text-field({label: false, name: 'email', required: 'required', placeholder: 'Email', type: 'email'})
+            +text-field({label: false, name: 'password', required: 'required', placeholder: 'Пароль', type: 'password'})
+            +toggle-button({label: false, name: 'specialOffers', items: ['Получать спецпредложения']})
+          +button({text: 'Войти', type: 'submit', name: 'submit', mod: [''], theme: ['wide', 'fill', 'arrowed']})
+          .login-form__footer Нет аккаунта на Toxin?
+            .login-form__button-wrapper
+              +button({text: 'Создать', name: 'button', mod: [''], theme: ['wide', 'border'], href: './registration.html'})
+          //fieldset
+            +textField('name', 'Имя')
+            +textField('surname', 'Фамилие')
+            +radioButtons(['Мужчина', 'Женщина'])
+          
+            +textField_maskedDate('Дата рождения')
+            fieldset
+              .form__label данные для входа в сервис
+              +textField('e-mail', 'Email', 'email')
+              +textField('password', 'Пароль')
+              +toggleButton('Получать спецпредложения')
         //img(src=require('./img/image3.png'), alt="sdfdsf") 
         //h1 h1 title 
         //h2 h2 title
@@ -169,10 +130,11 @@ html(lang="en")
         //+review('Мурад Сарафанов', '5 дней назад', 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.', '12', '../../theme/img/image.svg')
 
         //form.form(action="")
-          +formTitle('Найдём номера под ваши пожелания')
-          +date-dropdowns(['Прибытие', 'Выезд'])
-          +dropdown-with-menu(['Гости', 'some-text', 'Сколько гостей'], [['Взрослые', 'Дети', 'Младенцы']], "form__dropdown-with-menu_guest")
-          button.form__button.form__button_mod.form__button_theme_fill.form__button_theme_farr Подобрать номер
+          +form__Title('Найдём номера под ваши пожелания')
+          +date-dropdown({label: ['Прибытие', 'Выезд']})
+          +dropdown({label: 'Гости', placeholder: 'Сколько гостей', name: 'guest-dropdown', items: [{text: 'взрослые', group: 'гости'}, {text: 'дети', group: 'гости'}, {text: 'младенцы'}]})
+          +button({text: 'Подобрать номер', theme: ['fill', 'wide', 'arrowed'], href: './search-room.html'})
+          //button.form__button.form__button_mod.form__button_theme_fill.form__button_theme_farr Подобрать номер
 
         //form.form(action="")
           +formTitle('Регистрация акаунту')
@@ -188,4 +150,3 @@ html(lang="en")
             +toggleButton('Получать спецпредложения')
           button.form__button.form__button_mod.form__button_theme_fill.form__button_theme_farr Перейти к оплате
     +footer()
-

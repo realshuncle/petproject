@@ -1,13 +1,13 @@
-mixin room-details(config = {})
+mixin room-detail(config = {})
   - defultDetails = {label: 'detail-title', text: 'detail-text', theme: 'example',}
   - defaultConfig = {details: [{}, {}]};
   - config = Object.assign(defaultConfig, config);
   - for (let i = 0; i < config.details.length; i++) { 
   -  config.details[i] = Object.assign(Object.assign({}, defultDetails), config.details[i]);
   - }
-  .roomDetails
+  .room-detail
     each detail in config.details
-      .roomDetails__Glue(class = 'roomDetails__Glue_theme_' + detail.theme)
-        .roomDetails__Label #{detail.label}
-        .roomDetails__Text #{detail.text}
-      .roomDetails__line
+      .room-detail__glue(class = 'room-detail__glue_theme_' + detail.theme)
+        .room-detail__label #{detail.label}
+        .room-detail__text #{detail.text}
+      .room-detail__line

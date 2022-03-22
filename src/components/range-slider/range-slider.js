@@ -17,7 +17,6 @@ export default class RangeSlider {
     this.slider = element.querySelector('.range-slider__slider');
     this.range = element.querySelector('.range-slider__range');
     noUiSlider.create(this.slider, Object.assign(defaultOptions, options));
-    console.log(this);
     this.slider.noUiSlider.on('update', (e) => {
       let rangeArr =  this.slider.noUiSlider.get().sort((a, b) => Math.round(a - b));
       this.range.innerHTML = rangeArr.map(Math.round).map((x) => x + '₽').join(" - ");

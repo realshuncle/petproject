@@ -51,13 +51,17 @@ module.exports = {
       (page) => {
         //так как сервер запускает index.html то я его использую для запуска, т.е. для разработки
         //остальные стрпницы поставляются с хешом
-        let page_name = page == "index" ? `${page}.html` : `${page}.[contenthash].html`;
-        return new HtmlWebpackPlugin({
-          filename: page_name,//`${page}.[contenthash].html`,
-          // Названия для итоговых страниц, которые будут в корне dist
-          template: `${pagesDir}/${page}/${page}.pug`,
-          // Указываем откуда берем каждый элемент
-        })
+        //if (page != 'index') {
+          //let page_name = page == "index" ? `${page}.html` : `${page}.[contenthash].html`;
+          let page_name = `${page}.html`;
+          return new HtmlWebpackPlugin({
+            filename: page_name,//`${page}.[contenthash].html`,
+            // Названия для итоговых страниц, которые будут в корне dist
+            template: `${pagesDir}/${page}/${page}.pug`,
+            // Указываем откуда берем каждый элемент
+          })
+        //}
+
       }
         
       // /каталог со страницами/имя дирректории/имя диррекктории.pug
@@ -195,10 +199,10 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          /*loader: "babel-loader",
           options: {
               presets: ['@babel/preset-env']
-          }
+          }*/
         },
       },
     ],

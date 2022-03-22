@@ -7,7 +7,6 @@ for (let dateDropdown of document.querySelectorAll(".date-dropdown")) {
   window.addEventListener('DOMContentLoaded', (event) => {
     calendar.setFont(dateDropdown.offsetWidth * 14 / 320);
   });
-  
   //дропдауны для которых создается календарь
   let dropdowns = dateDropdown.querySelectorAll(".date-dropdown__input");
   //привязка показа к определнным элементам
@@ -47,7 +46,11 @@ for (let dateDropdown of document.querySelectorAll(".date-dropdown")) {
         day: '2-digit'
       });
     }
-    
+    dateDropdown.dispatchEvent(new CustomEvent('dropdown-change', {
+      detail: {
+        date: e.date,
+      }
+    }))
   })
   //очитска полей
   calendar.addEventListener('calendar-clear', function(e) {

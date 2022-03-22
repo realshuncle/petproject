@@ -1,4 +1,4 @@
-$text_color: rgba(31, 32, 65, 1);
+$text_color: #1F2041;
 $text_color75: transparentize($text_color, 0.25);
 $text_color50: transparentize($text_color, 0.5);
 $text_color25: transparentize($text_color, 0.75);
@@ -8,3 +8,14 @@ $primary_color: #BC9CFF;
 $primary_color_2: #8BA4F9;
 $secondary_color: #6FCF97;
 $secondary_color_2: #66D2EA;
+
+@function encodecolor($string) {
+  @if type-of($string) == 'color' and str-index(#{$string}, '#') == 1 {
+    $hex: str-slice(ie-hex-str($string), 4);
+    $string: unquote('#{$hex}');
+
+    @return '%23' + $string;
+  }
+
+  @return $string;
+}
